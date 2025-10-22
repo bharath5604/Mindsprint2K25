@@ -18,12 +18,10 @@ export default function RegisterPage() {
     member1Phone: '',
     email: '',
     problemLink: '',
-    // --- MODIFICATIONS START ---
     track: '',
     member1Gender: '',
     member2Gender: '',
     member3Gender: '',
-    // --- MODIFICATIONS END ---
   };
   const [formData, setFormData] = useState(initialFormData);
 
@@ -37,21 +35,18 @@ export default function RegisterPage() {
 
   const showMessage = (message, type) => {
     setResponseMsg({ text: message, type });
-    setTimeout(() => setResponseMsg({ text: '', type: '' }), 5000); // Increased time for longer messages
+    setTimeout(() => setResponseMsg({ text: '', type: '' }), 5000);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // --- MODIFICATIONS START ---
-    // Expanded Client-side validation
     const requiredFields = ['collegeName', 'city', 'state', 'department', 'teamSize', 'member1', 'member1Phone', 'email', 'problemLink', 'track', 'member1Gender'];
     if (requiredFields.some(field => !formData[field])) {
         showMessage("❌ Please fill all required fields.", "error");
         return;
     }
 
-    // "Femine Sakthi" track validation
     if (formData.track === 'Femine Sakthi (Women Empowermen)') {
         if (formData.member1Gender !== 'Female') {
             showMessage("❌ For the Femine Sakthi track, Member 1 must be female.", "error");
@@ -66,7 +61,6 @@ export default function RegisterPage() {
             return;
         }
     }
-    // --- MODIFICATIONS END ---
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/participants/register`, {
@@ -89,7 +83,6 @@ export default function RegisterPage() {
     }
   };
 
-  // Determine number of members to show based on team size
   const memberCount = parseInt(formData.teamSize, 10) || 0;
 
   return (
@@ -118,7 +111,6 @@ export default function RegisterPage() {
                     <option value="Other">Other</option>
                 </select>
 
-                {/* --- MODIFICATION: ADDED TRACK SELECTOR --- */}
                 <select name="track" value={formData.track} onChange={handleChange} required>
                     <option value="">Select Hackathon Track</option>
                     <option value="Intellect Innovators (AI & ML)">Intellect Innovators (AI & ML)</option>
@@ -139,42 +131,40 @@ export default function RegisterPage() {
                     <option value="3">3</option>
                 </select>
                 
-                {/* --- MODIFICATION: ADDED GENDER SELECTORS AND CONDITIONAL RENDERING --- */}
+                {/* --- MODIFICATIONS START: Radio Buttons for Gender --- */}
                 {memberCount >= 1 && (
                   <div className="member-fields">
                     <input type="text" name="member1" value={formData.member1} onChange={handleChange} placeholder="1st Member Name" required />
-                    <select name="member1Gender" value={formData.member1Gender} onChange={handleChange} required>
-                      <option value="">Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
+                    <div className="gender-selector" role="group" aria-label="Member 1 Gender">
+                      <label><input type="radio" name="member1Gender" value="Male" checked={formData.member1Gender === 'Male'} onChange={handleChange} required /><span>Male</span></label>
+                      <label><input type="radio" name="member1Gender" value="Female" checked={formData.member1Gender === 'Female'} onChange={handleChange} /><span>Female</span></label>
+                      <label><input type="radio" name="member1Gender" value="Other" checked={formData.member1Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
+                    </div>
                   </div>
                 )}
 
                 {memberCount >= 2 && (
                   <div className="member-fields">
                     <input type="text" name="member2" value={formData.member2} onChange={handleChange} placeholder="2nd Member Name" required />
-                    <select name="member2Gender" value={formData.member2Gender} onChange={handleChange} required>
-                      <option value="">Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
+                    <div className="gender-selector" role="group" aria-label="Member 2 Gender">
+                      <label><input type="radio" name="member2Gender" value="Male" checked={formData.member2Gender === 'Male'} onChange={handleChange} required /><span>Male</span></label>
+                      <label><input type="radio" name="member2Gender" value="Female" checked={formData.member2Gender === 'Female'} onChange={handleChange} /><span>Female</span></label>
+                      <label><input type="radio" name="member2Gender" value="Other" checked={formData.member2Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
+                    </div>
                   </div>
                 )}
                 
                 {memberCount >= 3 && (
                   <div className="member-fields">
                     <input type="text" name="member3" value={formData.member3} onChange={handleChange} placeholder="3rd Member Name" required />
-                    <select name="member3Gender" value={formData.member3Gender} onChange={handleChange} required>
-                      <option value="">Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
+                    <div className="gender-selector" role="group" aria-label="Member 3 Gender">
+                      <label><input type="radio" name="member3Gender" value="Male" checked={formData.member3Gender === 'Male'} onChange={handleChange} required /><span>Male</span></label>
+                      <label><input type="radio" name="member3Gender" value="Female" checked={formData.member3Gender === 'Female'} onChange={handleChange} /><span>Female</span></label>
+                      <label><input type="radio" name="member3Gender" value="Other" checked={formData.member3Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
+                    </div>
                   </div>
                 )}
+                {/* --- MODIFICATIONS END --- */}
 
                 <input type="text" name="member1Phone" value={formData.member1Phone} onChange={handleChange} placeholder="1st Member Phone" required />
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />

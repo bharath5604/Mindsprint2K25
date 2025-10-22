@@ -1537,3 +1537,89 @@ body {
     font-size: 1.8rem;
   }
 }
+/* =================================== */
+/* ==   MODIFIED REGISTRATION FORM STYLES   == */
+/* =================================== */
+
+/* 1. Member Fields Layout
+--------------------------------------*/
+/* This ensures the name input and gender selector are side-by-side and aligned */
+.member-fields {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  gap: 16px;
+}
+
+/* The name input will now take up the available space */
+.member-fields > input[type="text"] {
+  flex: 1; /* Allows the input to grow */
+  min-width: 0; /* Prevents overflow issues in flex containers */
+}
+
+/* 2. Gender Selector Container
+--------------------------------------*/
+.gender-selector {
+  display: flex;
+  gap: 8px; /* Spacing between radio buttons */
+  flex-shrink: 0; /* Prevents the container from shrinking */
+}
+
+/* 3. Custom Radio Button Styling
+--------------------------------------*/
+.gender-selector label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none; /* Prevents text selection on click */
+}
+
+/* Hide the default radio button */
+.gender-selector input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The visible part of the radio button (the text) */
+.gender-selector span {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1.3px solid #d1d5db;
+  background: #fff;
+  color: #786fa6;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Style for when the radio is selected (checked) */
+.gender-selector input[type="radio"]:checked + span {
+  background: #786fa6; /* Purple background */
+  color: white;
+  border-color: #786fa6;
+}
+
+/* Style for hover effect */
+.gender-selector label:hover span {
+  border-color: #786fa6;
+}
+
+/* 4. Responsive adjustments
+--------------------------------------*/
+@media (max-width: 540px) {
+  .member-fields {
+    flex-direction: column; /* Stack name and gender on top of each other */
+    align-items: stretch; /* Make children take full width */
+    gap: 12px;
+  }
+  
+  .gender-selector {
+    justify-content: space-between; /* Distribute radio buttons */
+  }
+
+  .gender-selector span {
+    flex: 1; /* Allow buttons to grow equally */
+    text-align: center;
+  }
+}
