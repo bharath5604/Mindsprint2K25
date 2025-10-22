@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'; // <-- CORRECT
+import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
-import Participant from '@/lib/models/Participant'; // <-- CORRECT
+import Participant from '@/lib/models/Participant';
 import { sendMail } from '@/lib/mailer';
 
 export async function POST(request) {
@@ -10,27 +10,39 @@ export async function POST(request) {
     const body = await request.json();
     const {
       collegeName, city, state, department, teamSize,
-      member1, member2, member3, member1Phone, email, problemLink
+      member1, member2, member3, member1Phone, email, problemLink,
+      // --- MODIFICATIONS START ---
+      track, member1Gender, member2Gender, member3Gender
+      // --- MODIFICATIONS END ---
     } = body;
 
     // 1. Basic validation for required fields
-    if (!collegeName || !city || !state || !department || !teamSize || !member1 || !member1Phone || !email || !problemLink) {
+    const requiredFields = [collegeName, city, state, department, teamSize, member1, member1Phone, email, problemLink, track, member1Gender];
+    if (requiredFields.some(field => !field)) {
       return NextResponse.json({ message: "Please fill all required fields." }, { status: 400 });
     }
 
-    // 2. Build the query for the duplicate check dynamically
-    const orConditions = [];
+    // --- MODIFICATIONS START ---
+    // 2. Server-side validation for the "Femine Sakthi" track
+    if (track === 'Femine Sakthi (Women Empowermen)') {
+        if (member1Gender !== 'Female') {
+            return NextResponse.json({ message: "Validation Error: For the Femine Sakthi track, Member 1 must be female." }, { status: 400 });
+        }
+        // Only validate members that are part of the team
+        if (member2 && member2Gender !== 'Female') {
+            return NextResponse.json({ message: "Validation Error: For the Femine Sakthi track, Member 2 must be female." }, { status: 400 });
+        }
+        if (member3 && member3Gender !== 'Female') {
+            return NextResponse.json({ message: "Validation Error: For the Femine Sakthi track, Member 3 must be female." }, { status: 400 });
+        }
+    }
+    // --- MODIFICATIONS END ---
 
-    // Always check for the primary email and phone number
-    orConditions.push({ email: email });
-    orConditions.push({ member1Phone: member1Phone });
-
-    // Create an array of all team members who have a non-empty name
-    const teamMembers = [member1, member2, member3].filter(Boolean); // filter(Boolean) removes empty strings, null, undefined
+    // 3. Build the query for the duplicate check dynamically
+    const orConditions = [{ email: email }, { member1Phone: member1Phone }];
+    const teamMembers = [member1, member2, member3].filter(Boolean);
 
     if (teamMembers.length > 0) {
-      // This condition checks if any of the provided team member names
-      // already exist in ANY of the member name fields of a document.
       orConditions.push({
         $or: [
           { member1: { $in: teamMembers } },
@@ -40,11 +52,10 @@ export async function POST(request) {
       });
     }
 
-    // 3. Execute the duplicate check query
+    // 4. Execute the duplicate check query
     const existing = await Participant.findOne({ $or: orConditions });
 
     if (existing) {
-      // Log what caused the duplicate for easier debugging
       console.log("Duplicate registration blocked.", {
         submittedEmail: email,
         submittedPhone: member1Phone,
@@ -54,15 +65,17 @@ export async function POST(request) {
       return NextResponse.json({ message: "Error: Email, phone, or a team member is already registered!" }, { status: 400 });
     }
 
-    // 4. If no duplicates, proceed with saving the new participant
+    // 5. If no duplicates, proceed with saving the new participant
     const participant = new Participant(body);
     await participant.save();
 
+    // --- MODIFICATIONS START ---
+    // 6. Update email content to include the selected track
     const subject = "✅ Mindsprint 2K25 Registration Successful";
-    const text = `Hello ${participant.member1},\n\nYou have successfully registered for Mindsprint 2K25.\n\nThank you!`;
-    const html = `<p>Hello <b>${participant.member1}</b>,</p><p>You have successfully registered for <b>Mindsprint 2K25</b>.</p><p>Thank you for registering!</p>`;
+    const text = `Hello ${participant.member1},\n\nYou have successfully registered for Mindsprint 2K25 under the track: ${participant.track}.\n\nThank you!`;
+    const html = `<p>Hello <b>${participant.member1}</b>,</p><p>You have successfully registered for <b>Mindsprint 2K25</b> under the track: <b>${participant.track}</b>.</p><p>Thank you for registering!</p>`;
+    // --- MODIFICATIONS END ---
     
-    // We don't need to `await` this, it can run in the background
     sendMail(participant.email, subject, text, html);
 
     return NextResponse.json({ message: "Registration successful! Confirmation email sent." });

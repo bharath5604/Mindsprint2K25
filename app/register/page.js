@@ -4,10 +4,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 export default function RegisterPage() {
-  // State for the pop-up message
   const [responseMsg, setResponseMsg] = useState({ text: '', type: '' });
 
-  // A single state object to hold all form data
   const initialFormData = {
     collegeName: '',
     city: '',
@@ -19,11 +17,16 @@ export default function RegisterPage() {
     member3: '',
     member1Phone: '',
     email: '',
-    problemLink: ''
+    problemLink: '',
+    // --- MODIFICATIONS START ---
+    track: '',
+    member1Gender: '',
+    member2Gender: '',
+    member3Gender: '',
+    // --- MODIFICATIONS END ---
   };
   const [formData, setFormData] = useState(initialFormData);
 
-  // A single handler to update the formData state
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -34,23 +37,41 @@ export default function RegisterPage() {
 
   const showMessage = (message, type) => {
     setResponseMsg({ text: message, type });
-    setTimeout(() => setResponseMsg({ text: '', type: '' }), 4000);
+    setTimeout(() => setResponseMsg({ text: '', type: '' }), 5000); // Increased time for longer messages
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
-    // Client-side validation... (can be expanded here)
-    if (!formData.collegeName || !formData.city || !formData.state || !formData.department || !formData.teamSize || !formData.member1 || !formData.member1Phone || !formData.email || !formData.problemLink) {
+    // --- MODIFICATIONS START ---
+    // Expanded Client-side validation
+    const requiredFields = ['collegeName', 'city', 'state', 'department', 'teamSize', 'member1', 'member1Phone', 'email', 'problemLink', 'track', 'member1Gender'];
+    if (requiredFields.some(field => !formData[field])) {
         showMessage("❌ Please fill all required fields.", "error");
         return;
     }
+
+    // "Femine Sakthi" track validation
+    if (formData.track === 'Femine Sakthi (Women Empowermen)') {
+        if (formData.member1Gender !== 'Female') {
+            showMessage("❌ For the Femine Sakthi track, Member 1 must be female.", "error");
+            return;
+        }
+        if (formData.member2 && formData.member2Gender !== 'Female') {
+            showMessage("❌ For the Femine Sakthi track, Member 2 must be female.", "error");
+            return;
+        }
+        if (formData.member3 && formData.member3Gender !== 'Female') {
+            showMessage("❌ For the Femine Sakthi track, Member 3 must be female.", "error");
+            return;
+        }
+    }
+    // --- MODIFICATIONS END ---
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/participants/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // Send the complete formData state object
         body: JSON.stringify(formData)
       });
 
@@ -58,7 +79,6 @@ export default function RegisterPage() {
 
       if (res.ok) {
         showMessage("✅ Registration successful!", "success");
-        // Reset the form by setting the state back to its initial value
         setFormData(initialFormData);
       } else {
         showMessage(`❌ ${data.message || "Registration failed."}`, "error");
@@ -69,6 +89,9 @@ export default function RegisterPage() {
     }
   };
 
+  // Determine number of members to show based on team size
+  const memberCount = parseInt(formData.teamSize, 10) || 0;
+
   return (
     <>
       <header><nav className="navbar"><Link href="/" className="home-btn">Home</Link></nav></header>
@@ -78,14 +101,12 @@ export default function RegisterPage() {
           <div id="responseMsg" style={{ color: responseMsg.type === 'success' ? '#16a34a' : '#dc2626', opacity: responseMsg.text ? 1 : 0, transition: 'opacity 0.3s' }}>
             {responseMsg.text}
           </div>
-          {/* Add the onSubmit handler to the form tag */}
           <form id="registrationForm" onSubmit={handleSubmit}>
-                {/* Each input is now "controlled" by the component's state */}
-                <input type="text" id="collegeName" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="College Name" required />
-                <input type="text" id="city" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
-                <input type="text" id="state" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />
+                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="College Name" required />
+                <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
+                <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />
                 
-                <select id="department" name="department" value={formData.department} onChange={handleChange} required>
+                <select name="department" value={formData.department} onChange={handleChange} required>
                     <option value="">Select Department / Degree</option>
                     <option value="CSE">BTech CSE / CSE Allied Branches</option>
                     <option value="ECE">BTech ECE</option>
@@ -97,19 +118,67 @@ export default function RegisterPage() {
                     <option value="Other">Other</option>
                 </select>
 
-                <select id="teamSize" name="teamSize" value={formData.teamSize} onChange={handleChange} required>
+                {/* --- MODIFICATION: ADDED TRACK SELECTOR --- */}
+                <select name="track" value={formData.track} onChange={handleChange} required>
+                    <option value="">Select Hackathon Track</option>
+                    <option value="Intellect Innovators (AI & ML)">Intellect Innovators (AI & ML)</option>
+                    <option value="Bot Builds (IoT, Robotics & Automation)">Bot Builds (IoT, Robotics & Automation)</option>
+                    <option value="Code Guardians (Cyber Security & Block Chain)">Code Guardians (Cyber Security & Block Chain)</option>
+                    <option value="Eco Drivers (Electrical Vehicles)">Eco Drivers (Electrical Vehicles)</option>
+                    <option value="Femine Sakthi (Women Empowermen)">Femine Sakthi (Women Empowerment)</option>
+                    <option value="Plan Horizons (Business Plan)">Plan Horizons (Business Plan)</option>
+                    <option value="Medi Minds (Bio-medical)">Medi Minds (Bio-medical)</option>
+                    <option value="App Ventures (Mobile & Web Application)">App Ventures (Mobile & Web Application)</option>
+                    <option value="Superposition (Quantum Computing)">Superposition (Quantum Computing)</option>
+                </select>
+
+                <select name="teamSize" value={formData.teamSize} onChange={handleChange} required>
                     <option value="">Team Size</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
+                
+                {/* --- MODIFICATION: ADDED GENDER SELECTORS AND CONDITIONAL RENDERING --- */}
+                {memberCount >= 1 && (
+                  <div className="member-fields">
+                    <input type="text" name="member1" value={formData.member1} onChange={handleChange} placeholder="1st Member Name" required />
+                    <select name="member1Gender" value={formData.member1Gender} onChange={handleChange} required>
+                      <option value="">Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                )}
 
-                <input type="text" id="member1" name="member1" value={formData.member1} onChange={handleChange} placeholder="1st Member Name" required />
-                <input type="text" id="member2" name="member2" value={formData.member2} onChange={handleChange} placeholder="2nd Member Name" />
-                <input type="text" id="member3" name="member3" value={formData.member3} onChange={handleChange} placeholder="3rd Member Name" />
-                <input type="text" id="member1Phone" name="member1Phone" value={formData.member1Phone} onChange={handleChange} placeholder="1st Member Phone" required />
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
-                <input type="url" id="problemLink" name="problemLink" value={formData.problemLink} onChange={handleChange} placeholder="Problem Statement Drive Link (PDF)" required />
+                {memberCount >= 2 && (
+                  <div className="member-fields">
+                    <input type="text" name="member2" value={formData.member2} onChange={handleChange} placeholder="2nd Member Name" required />
+                    <select name="member2Gender" value={formData.member2Gender} onChange={handleChange} required>
+                      <option value="">Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                )}
+                
+                {memberCount >= 3 && (
+                  <div className="member-fields">
+                    <input type="text" name="member3" value={formData.member3} onChange={handleChange} placeholder="3rd Member Name" required />
+                    <select name="member3Gender" value={formData.member3Gender} onChange={handleChange} required>
+                      <option value="">Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                )}
+
+                <input type="text" name="member1Phone" value={formData.member1Phone} onChange={handleChange} placeholder="1st Member Phone" required />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
+                <input type="url" name="problemLink" value={formData.problemLink} onChange={handleChange} placeholder="Problem Statement Drive Link (PDF)" required />
                 
                 <button type="submit">Register</button>
             </form>
