@@ -1346,3 +1346,138 @@ body {
   margin-top: -5px;
   margin-bottom: 10px;
 }
+/* =================================== */
+/* ==   RESPONSIVE DESIGN STYLES      == */
+/* =================================== */
+
+/* --- For Tablets (and large phones) --- */
+/* Applies when the screen width is 768px or less */
+@media (max-width: 768px) {
+  /* --- Navigation --- */
+  .nav-menu {
+    /* Hide the text links in the navbar on smaller screens */
+    display: none;
+  }
+
+  /* --- Hero Section --- */
+  .hero-content {
+    /* Reduce top margin to bring content up a bit */
+    margin-top: 0;
+    /* Add horizontal padding so text doesn't touch the edges */
+    padding: 0 20px;
+  }
+
+  .hero-title {
+    /* Reduce font size for smaller screens */
+    font-size: 2.8rem;
+    line-height: 1.2; /* Adjust line height for better readability */
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-details {
+    /* Stack the detail items vertically instead of horizontally */
+    flex-direction: column;
+    gap: 20px; /* Adjust spacing between stacked items */
+    margin-bottom: 30px;
+  }
+  
+  .hero-buttons {
+    /* Stack buttons vertically */
+    flex-direction: column;
+    gap: 15px;
+    align-items: center; /* Center the stacked buttons */
+  }
+  
+  .btn-primary, .btn-secondary {
+    /* Make buttons take more width for easier tapping */
+    width: 80%;
+    max-width: 300px;
+    justify-content: center; /* Center the text inside the button */
+  }
+
+  /* --- Tracks Section --- */
+  .tracks-grid {
+    /* Switch to a single-column layout */
+    grid-template-columns: 1fr;
+  }
+
+  /* --- About & Contact Sections --- */
+  .about-content, .contact-info {
+    /* Switch to a single-column grid for cards */
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* --- Registration Form --- */
+  .register-container {
+    /* Reduce margin and padding for smaller screens */
+    margin: 40px 15px;
+    padding: 30px 20px;
+  }
+  
+  /* --- Footer --- */
+  .footer-content {
+    /* Stack footer items vertically */
+    flex-direction: column;
+    text-align: center;
+    gap: 25px;
+  }
+}
+
+
+/* --- For Small Mobile Phones --- */
+/* Applies when the screen width is 480px or less */
+@media (max-width: 480px) {
+  /* --- Hero Section --- */
+  .hero {
+    /* Reduce top padding on the smallest screens */
+    padding-top: 100px;
+  }
+  
+  .hero-title {
+    /* Further reduce font size for very small screens */
+    font-size: 2.2rem;
+  }
+  
+  .hero-badge, .participant-counter {
+    /* Adjust padding and font size for badges */
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .count-value {
+    font-size: 1.5rem;
+  }
+
+  .countdown-container {
+    /* Simplify countdown for small screens */
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .countdown-timer {
+    gap: 10px;
+  }
+
+  .time-unit {
+    min-width: 65px;
+    padding: 10px;
+  }
+
+  .time-value {
+    font-size: 1.5rem;
+  }
+
+  /* --- General Section Titles --- */
+  .section-title, .section-title1 {
+    font-size: 2rem;
+  }
+  
+  /* --- Registration Form --- */
+  .register-container h2 {
+    font-size: 1.8rem;
+  }
+}
