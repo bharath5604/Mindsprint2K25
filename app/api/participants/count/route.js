@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import Participant from '@/lib/models/Participant';
-
+export const dynamic = 'force-dynamic';
 export async function GET() {
   await dbConnect();
   try {
