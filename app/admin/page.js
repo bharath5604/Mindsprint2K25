@@ -1,10 +1,16 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AnalyticsChart from '../../components/AnalyticsChart'; // Corrected Path
 
 export default function AdminPage() {
     const [token, setToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [adminMsg, setAdminMsg] = useState({ text: '', type: '' });
+    
+    // --- MODIFICATIONS START ---
+    const [analyticsData, setAnalyticsData] = useState(null);
+    const [loadingAnalytics, setLoadingAnalytics] = useState(false);
+    // --- MODIFICATIONS END ---
 
     const showMessage = (message, type) => {
         setAdminMsg({ text: message, type });
@@ -34,6 +40,32 @@ export default function AdminPage() {
         }
     };
     
+    // --- MODIFICATION: Fetch analytics data when logged in ---
+    useEffect(() => {
+        const fetchAnalytics = async () => {
+            if (!token) return;
+            setLoadingAnalytics(true);
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/analytics`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error('Failed to fetch analytics');
+                const data = await res.json();
+                setAnalyticsData(data);
+            } catch (err) {
+                console.error(err);
+                showMessage('Could not load analytics.', 'error');
+            } finally {
+                setLoadingAnalytics(false);
+            }
+        };
+
+        if (isLoggedIn) {
+            fetchAnalytics();
+        }
+    }, [isLoggedIn, token]);
+
+
     const handleDownload = async (url, filename) => {
         if (!token) return;
         showMessage('Starting download...', 'success');
@@ -56,19 +88,14 @@ export default function AdminPage() {
         }
     };
 
-    // Dynamically set className for the message
     const messageClassName = `admin-msg ${adminMsg.type} ${adminMsg.text ? 'visible' : ''}`;
 
     return (
-        // New class for the body background
         <div className="admin-page-body">
-            <main className="admin-container">
+            <main className="admin-container" style={{ maxWidth: isLoggedIn ? '800px' : '420px', transition: 'max-width 0.5s ease' }}>
                 <h2>Admin Panel</h2>
                 
-                {/* New message div with dynamic classes */}
-                <div className={messageClassName}>
-                    {adminMsg.text}
-                </div>
+                <div className={messageClassName}>{adminMsg.text}</div>
 
                 {!isLoggedIn ? (
                     <form className="admin-form" onSubmit={handleLogin}>
@@ -77,20 +104,30 @@ export default function AdminPage() {
                         <button type="submit" className="btn-admin btn-admin-primary">Login</button>
                     </form>
                 ) : (
-                    <div className="download-section">
-                        <h3>Downloads</h3>
-                        <p>Access participant data and submitted files.</p>
-                        <button 
-                            className="btn-admin btn-admin-primary" 
-                            onClick={() => handleDownload(`${process.env.NEXT_PUBLIC_API_URL}/admin/download`, 'participants.xlsx')}>
-                            Download Excel Sheet
-                        </button>
-                        <button 
-                            className="btn-admin btn-admin-secondary" 
-                            onClick={() => handleDownload(`${process.env.NEXT_PUBLIC_API_URL}/admin/download-pdfs`, 'all_pdfs.zip')}>
-                            Download All PDFs (ZIP)
-                        </button>
-                    </div>
+                    <>
+                        {/* --- MODIFICATION: Display Analytics Chart --- */}
+                        <div className="analytics-section">
+                            <h3>Track Analytics</h3>
+                            {loadingAnalytics && <p>Loading chart...</p>}
+                            {analyticsData && analyticsData.length > 0 && <AnalyticsChart chartData={analyticsData} />}
+                            {analyticsData && analyticsData.length === 0 && <p>No registration data available to display.</p>}
+                        </div>
+
+                        <div className="download-section">
+                            <h3>Downloads</h3>
+                            <p>Access participant data and submitted files.</p>
+                            <button 
+                                className="btn-admin btn-admin-primary" 
+                                onClick={() => handleDownload(`${process.env.NEXT_PUBLIC_API_URL}/admin/download`, 'participants.xlsx')}>
+                                Download Excel Sheet
+                            </button>
+                            <button 
+                                className="btn-admin btn-admin-secondary" 
+                                onClick={() => handleDownload(`${process.env.NEXT_PUBLIC_API_URL}/admin/download-pdfs`, 'all_pdfs.zip')}>
+                                Download All PDFs (ZIP)
+                            </button>
+                        </div>
+                    </>
                 )}
             </main>
         </div>
