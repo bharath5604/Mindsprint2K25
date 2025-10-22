@@ -40,6 +40,7 @@ export default function Home() {
         <div className="hero-content">
           <div className="hero-badge">
             <i className="fas fa-trophy"></i>
+            <br></br>
             <span>36 Hours of Innovation</span>
           </div>
           <h1 className="hero-title">

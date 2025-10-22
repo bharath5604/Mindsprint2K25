@@ -93,7 +93,7 @@ body {
   position: relative;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   overflow: hidden;
-  padding-top: 20px;          /* add space below nav, reduce gap */
+  padding-top: 30px;          /* add space below nav, reduce gap */
 }
 
 .hero-content {
