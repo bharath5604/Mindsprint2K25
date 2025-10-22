@@ -23,7 +23,7 @@ export async function GET(request) {
       TeamSize: p.teamSize,
       Member1: p.member1,
       Member1_Gender: p.member1Gender, // ADDED
-      Member2: p.member2 || '',
+      Member2: p.member2 || '', //test 
       Member2_Gender: p.member2Gender || '', // ADDED
       Member3: p.member3 || '',
       Member3_Gender: p.member3Gender || '', // ADDED
