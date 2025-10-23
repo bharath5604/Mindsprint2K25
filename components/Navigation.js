@@ -33,7 +33,7 @@ export default function Navigation() {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <div>
+        <div className="nav-logo">
         
           <span>Mindsprint2K25</span>
         </div>
