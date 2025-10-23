@@ -77,7 +77,7 @@ export default function Home() {
           <Countdown />
         </div>
       </section>
-     <Partners />
+    
       {/* About Section */}
       <section id="about" className="about-section">
         <div className="container">

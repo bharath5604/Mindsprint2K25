@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         
         {/* --- MODIFICATION START: Added Fixed Banner and Navigation --- */}
         <div className="fixed-banner">
-          <img src="/colleg_banner.jpg" alt="College Banner" />
+          <img src="/college_banner.jpg" alt=" Banner" />
         </div>
         <Navigation />
         {/* --- MODIFICATION END --- */}
