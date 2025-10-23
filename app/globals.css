@@ -1,3 +1,11 @@
+/* =================================== */
+/* ==   GLOBAL VARIABLES & SETUP    == */
+/* =================================== */
+
+:root {
+  --banner-height: 80px; /* Controls the height of the top banner */
+  --navbar-height: 70px; /* The height of the navigation bar */
+}
 
 /* Reset and Base Styles */
 * {
@@ -11,6 +19,8 @@ body {
     line-height: 1.6;
     color: #1a202c;
     overflow-x: hidden;
+    /* This padding prevents content from hiding behind the fixed banner and nav */
+    padding-top: calc(var(--banner-height) + var(--navbar-height));
 }
 
 .container {
@@ -19,13 +29,36 @@ body {
     padding: 0 20px;
 }
 
+/* =================================== */
+/* ==      FIXED HEADER & NAV       == */
+/* =================================== */
+
+.fixed-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--banner-height);
+  background-color: #1a202c; /* Dark fallback background */
+  z-index: 1001; /* Must be higher than the navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.fixed-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the banner space */
+}
+
 /* Navigation */
 .navbar {
   position: fixed;
-  top: 0;
+  top: var(--banner-height); /* Positioned exactly below the banner */
   width: 100%;
   background: rgba(255, 255, 255, 0.95);
-  /* Matches main hero gradient */
   backdrop-filter: blur(12px);
   border-bottom: 1.5px solid rgba(255,255,255,0.25);
   box-shadow: 0 8px 32px rgba(102,126,234,0.10);
@@ -40,7 +73,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: var(--navbar-height);
 }
 
 .nav-logo {
@@ -70,7 +103,6 @@ body {
     color: #3b82f6;
 }
 
-
 .register-btn {
     background: linear-gradient(135deg, #3b82f6, #8b5cf6);
     color: white !important;
@@ -85,15 +117,20 @@ body {
     box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
 }
 
+
+/* =================================== */
+/* ==         PAGE SECTIONS         == */
+/* =================================== */
+
 /* Hero Section */
 .hero {
-  min-height: 95vh;          /* reduce from 100vh */
+  min-height: 95vh;
   display: flex;
-  align-items: flex-start;    /* was center; shifts toward top */
+  align-items: flex-start;
   position: relative;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   overflow: hidden;
-  padding-top: 30px;          /* add space below nav, reduce gap */
+  padding-top: 30px; /* Extra spacing below the nav */
 }
 
 .hero-content {
@@ -104,7 +141,7 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
-  margin-top: 60px;           /* was default, can reduce further if needed */
+  margin-top: 60px;
   animation: fadeInUp 1s ease-out;
 }
 
@@ -122,7 +159,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: 
+    background-image:
         radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.3), transparent),
         radial-gradient(2px 2px at 40% 70%, rgba(255, 255, 255, 0.2), transparent),
         radial-gradient(1px 1px at 60% 20%, rgba(255, 255, 255, 0.4), transparent),
@@ -150,62 +187,20 @@ body {
     animation: float 6s ease-in-out infinite;
 }
 
-.shape-1 {
-    width: 80px;
-    height: 80px;
-    top: 20%;
-    left: 10%;
-    animation-delay: -1s;
-}
-
-.shape-2 {
-    width: 120px;
-    height: 120px;
-    top: 60%;
-    right: 15%;
-    animation-delay: -2s;
-}
-
-.shape-3 {
-    width: 60px;
-    height: 60px;
-    top: 80%;
-    left: 20%;
-    animation-delay: -3s;
-}
-
-.shape-4 {
-    width: 100px;
-    height: 100px;
-    top: 30%;
-    right: 30%;
-    animation-delay: -4s;
-}
-
-.shape-5 {
-    width: 140px;
-    height: 140px;
-    top: 10%;
-    right: 10%;
-    animation-delay: -5s;
-}
+.shape-1 { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: -1s; }
+.shape-2 { width: 120px; height: 120px; top: 60%; right: 15%; animation-delay: -2s; }
+.shape-3 { width: 60px; height: 60px; top: 80%; left: 20%; animation-delay: -3s; }
+.shape-4 { width: 100px; height: 100px; top: 30%; right: 30%; animation-delay: -4s; }
+.shape-5 { width: 140px; height: 140px; top: 10%; right: 10%; animation-delay: -5s; }
 
 @keyframes float {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
     50% { transform: translateY(-20px) rotate(180deg); }
 }
 
-
-
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-badge {
@@ -413,7 +408,7 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #eceef3);
+    background: linear-gradient(135deg, #eceef3, #eceef3);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -522,41 +517,15 @@ body {
     transition: all 0.3s ease;
 }
 
-.track-icon.ai-ml {
-    background: linear-gradient(135deg, #3b82f6, #1e40af);
-}
-
-.track-icon.iot {
-    background: linear-gradient(135deg, #10b981, #059669);
-}
-
-.track-icon.robotics {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-}
-
-.track-icon.women {
-    background: linear-gradient(135deg, #ec4899, #be185d);
-}
-
-.track-icon.web3 {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-}
-
-.track-icon.fintech {
-    background: linear-gradient(135deg, #eab308, #ca8a04);
-}
-
-.track-icon.biomedical {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
-}
-
-.track-icon.mobile {
-    background: linear-gradient(135deg, #06b6d4, #0891b2);
-}
-
-.track-icon.cyber {
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
-}
+.track-icon.ai-ml { background: linear-gradient(135deg, #3b82f6, #1e40af); }
+.track-icon.iot { background: linear-gradient(135deg, #10b981, #059669); }
+.track-icon.robotics { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.track-icon.women { background: linear-gradient(135deg, #ec4899, #be185d); }
+.track-icon.web3 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.track-icon.fintech { background: linear-gradient(135deg, #eab308, #ca8a04); }
+.track-icon.biomedical { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.track-icon.mobile { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+.track-icon.cyber { background: linear-gradient(135deg, #6366f1, #4f46e5); }
 
 .track-card h3 {
     font-size: 1.5rem;
@@ -595,219 +564,35 @@ body {
     letter-spacing: 1px;
 }
 
-/* Schedule Section */
-.schedule-section {
-    padding: 100px 0;
-    background: #f8fafc;
+/* =================================== */
+/* ==   PARTNERS / SPONSORS SECTION   == */
+/* =================================== */
+
+.partners-section {
+  padding: 80px 0;
+  background: #f8fafc;
 }
 
-.timeline {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
+.logos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 50px;
 }
 
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 30px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+.logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.timeline-item {
-    position: relative;
-    padding-left: 80px;
-    margin-bottom: 40px;
-    animation: fadeInLeft 0.6s ease-out;
+.logo-image {
+  object-fit: contain;
+  max-width: 160px;
 }
 
-.timeline-item:nth-child(even) {
-    animation: fadeInRight 0.6s ease-out;
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.timeline-marker {
-    position: absolute;
-    left: 20px;
-    top: 10px;
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    border-radius: 50%;
-    border: 4px solid white;
-    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
-}
-
-.timeline-content {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e2e8f0;
-}
-
-.timeline-content h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #1a202c;
-}
-
-.schedule-time {
-    color: #3b82f6;
-    font-weight: 600;
-    font-size: 0.875rem;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.timeline-content p {
-    color: #64748b;
-    line-height: 1.6;
-}
-
-/* Registration Section */
-.register-section {
-    padding: 100px 0;
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    color: white;
-}
-
-.register-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.register-text h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.register-text p {
-    font-size: 1.25rem;
-    margin-bottom: 30px;
-    opacity: 0.9;
-    line-height: 1.6;
-}
-
-.register-benefits {
-    list-style: none;
-}
-
-.register-benefits li {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-    font-size: 1rem;
-}
-
-.register-benefits i {
-    color: #10b981;
-    font-size: 1.25rem;
-}
-
-.register-form {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 40px;
-    border-radius: 20px;
-}
-
-.register-form h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.register-form input,
-.register-form select {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;  
-    font-size: 1rem;
-}
-
-.register-form select option[value=""] {
-    color: rgba(255, 255, 255, 0.7);  /* ✅ gray placeholder */
-}
-.register-form select option:not([value=""]) {
-    color: black;
-    background: white;
-}
-
-/* Input placeholder styling */
-.register-form input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-
-.register-form input:focus,
-.register-form select:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.submit-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 16px;
-    background: linear-gradient(135deg, #f59e0b, #f97316);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
-}
 
 /* Contact Section */
 .contact-section {
@@ -930,117 +715,16 @@ body {
     color: #a0aec0;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-    }
-    
-    .hero-details {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .countdown-timer {
-        gap: 15px;
-    }
-    
-    .time-unit {
-        min-width: 60px;
-        padding: 15px;
-    }
-    
-    .tracks-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .register-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .register-text h2 {
-        font-size: 2rem;
-    }
-    
-    .timeline::before {
-        left: 20px;
-    }
-    
-    .timeline-item {
-        padding-left: 60px;
-    }
-    
-    .timeline-marker {
-        left: 10px;
-    }
-    
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-}
 
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .register-form {
-        padding: 30px 20px;
-    }
-}
-.participant-counter {
-  margin: 40px auto 32px auto;   /* More vertical spacing above and below */
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #fbbf24;                /* Gold for highlight */
-  display: flex;
-  align-items: center;
-  justify-content: center;       /* Fully center horizontally */
-  gap: 14px;
-  user-select: none;
-  background: rgba(255,255,255,0.09);
-  border-radius: 20px;
-  padding: 18px 32px;            /* Generous padding for top/bottom balance */
-  box-shadow: 0 6px 32px rgba(59,130,246,0.10);
-  animation: pulse 2.5s ease-in-out infinite;
-}
+/* =================================== */
+/* ==      REGISTRATION PAGE        == */
+/* =================================== */
 
-.participant-counter i {
-  font-size: 2rem;
-  color: #fbbf24;
-}
-
-/* .count-value {
-  font-size: 2.3rem;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  margin-left: 5px;
-} */
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.77; }
-}
-/* =======================
-   Registration Page Styles
-======================= */
 .register-container {
   max-width: 700px;
-  margin: 56px auto;
+  margin: 20px auto; /* Adjusted margin */
   padding: 36px;
   background: linear-gradient(135deg, #574b90 0%, #786fa6 100%);
-  /* Strong purple gradient */
   backdrop-filter: blur(12px) brightness(1.12);
   border-radius: 22px;
   box-shadow: 0 10px 32px rgba(102,126,234,0.11);
@@ -1069,7 +753,6 @@ body {
   color: #10b981;
 }
 
-/* Form fields */
 .register-container form {
   display: flex;
   flex-direction: column;
@@ -1105,7 +788,6 @@ body {
   box-shadow: 0 0 0 2px rgba(251,191,36,0.17);
 }
 
-/* Submit Button */
 .register-container button {
   background: linear-gradient(135deg, #fbbf24, #f59e0b);
   color: white;
@@ -1128,36 +810,56 @@ body {
   transform: translateY(0);
 }
 
-/* Two-column layout for team member names & phones */
 .member-fields {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  gap: 16px;
 }
-.member-fields > input {
+
+.member-fields > input[type="text"] {
   flex: 1;
+  min-width: 0;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .register-container {
-    margin: 34px 10px;
-    padding: 20px;
-  }
-  .member-fields {
-    flex-direction: column;
-  }
+.gender-selector {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-/* Animation for container entrance */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.gender-selector label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.gender-selector input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.gender-selector span {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1.3px solid #d1d5db;
+  background: #fff;
+  color: #786fa6;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.gender-selector input[type="radio"]:checked + span {
+  background: #786fa6;
+  color: white;
+  border-color: #786fa6;
+}
+
+.gender-selector label:hover span {
+  border-color: #786fa6;
 }
 
 .home-btn {
@@ -1170,8 +872,7 @@ body {
   border-radius: 36px;
   text-decoration: none;
   box-shadow: 0 2px 8px rgba(59,130,246,0.09);
-  margin-top: 18px;
-  margin-left: 24px;
+  /* Removed margin-top and margin-left to be controlled by nav-container */
   transition: box-shadow 0.3s, transform 0.2s, background 0.18s;
 }
 
@@ -1182,483 +883,130 @@ body {
   transform: translateY(-2px) scale(1.03);
 }
 
-/* =================================== */
-/* ==      NEW ADMIN PAGE STYLES      == */
-/* =================================== */
-
-/* 1. Body Background & Layout
---------------------------------------*/
-.admin-page-body {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); /* Dark Slate/Navy Gradient */
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Inter', sans-serif;
-  padding: 20px;
-}
-
-/* 2. Frosted Glass Container
---------------------------------------*/
-.admin-container {
-  width: 100%;
-  max-width: 420px;
-  padding: 40px 35px;
-  background: rgba(30, 41, 59, 0.5); /* Semi-transparent dark slate */
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  text-align: center;
-  color: #e2e8f0; /* Light text color */
-}
-
-/* 3. Typography
---------------------------------------*/
-.admin-container h2 {
-  font-size: 2.25rem;
-  font-weight: 800;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #60a5fa, #a78bfa); /* Cool Blue/Violet Gradient */
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
-}
-
-/* 4. Feedback Message Styling
---------------------------------------*/
-.admin-msg {
-  font-weight: 600;
-  margin-bottom: 20px;
-  min-height: 24px;
-  padding: 10px;
-  border-radius: 8px;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.admin-msg.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.admin-msg.success {
-  background-color: rgba(22, 163, 74, 0.2);
-  color: #4ade80; /* Bright Green */
-  border: 1px solid rgba(74, 222, 128, 0.3);
-}
-
-.admin-msg.error {
-  background-color: rgba(220, 38, 38, 0.2);
-  color: #f87171; /* Bright Red */
-  border: 1px solid rgba(248, 113, 113, 0.3);
-}
-
-/* 5. Form & Inputs
---------------------------------------*/
-.admin-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Increased spacing */
-  margin-top: 15px;
-}
-
-.admin-form input {
-  padding: 14px 18px;
-  font-size: 1rem;
-  border-radius: 12px;
-  border: 1px solid #475569; /* Slate border */
-  background: rgba(15, 23, 42, 0.7); /* Dark transparent navy */
-  color: #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.admin-form input::placeholder {
-  color: #94a3b8; /* Lighter placeholder */
-}
-
-.admin-form input:focus {
-  outline: none;
-  border-color: #60a5fa; /* Blue accent on focus */
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2); /* Subtle glow effect */
-}
-
-/* 6. Buttons
---------------------------------------*/
-.btn-admin {
-  padding: 14px 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 100%;
-}
-
-.btn-admin:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btn-admin-primary {
-  background-color: #3b82f6; /* Vibrant Blue */
-  color: white;
-}
-
-.btn-admin-primary:hover {
-  background-color: #60a5fa; /* Lighter blue on hover */
-}
-
-.btn-admin-secondary {
-  background-color: #334155; /* Dark Slate */
-  color: #cbd5e1;
-  border: 1px solid #475569;
-}
-
-.btn-admin-secondary:hover {
-  background-color: #475569;
-  color: white;
-}
-
-/* 7. Download Section
---------------------------------------*/
-.download-section {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.download-section h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 0;
-}
-
-.download-section p {
-  font-size: 1rem;
-  color: #94a3b8;
-  margin-top: -5px;
-  margin-bottom: 10px;
-}
-/* =================================== */
-/* ==   RESPONSIVE DESIGN STYLES      == */
-/* =================================== */
-
-/* --- For Tablets (and large phones) --- */
-/* Applies when the screen width is 768px or less */
-@media (max-width: 768px) {
-  /* --- Navigation --- */
-  .nav-menu {
-    /* Hide the text links in the navbar on smaller screens */
-    display: none;
-  }
-
-  /* --- Hero Section --- */
-  .hero-content {
-    /* Reduce top margin to bring content up a bit */
-    margin-top: 0;
-    /* Add horizontal padding so text doesn't touch the edges */
-    padding: 0 20px;
-  }
-
-  .hero-title {
-    /* Reduce font size for smaller screens */
-    font-size: 2.8rem;
-    line-height: 1.2; /* Adjust line height for better readability */
-  }
-
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
-
-  .hero-details {
-    /* Stack the detail items vertically instead of horizontally */
-    flex-direction: column;
-    gap: 20px; /* Adjust spacing between stacked items */
-    margin-bottom: 30px;
-  }
-  
-  .hero-buttons {
-    /* Stack buttons vertically */
-    flex-direction: column;
-    gap: 15px;
-    align-items: center; /* Center the stacked buttons */
-  }
-  
-  .btn-primary, .btn-secondary {
-    /* Make buttons take more width for easier tapping */
-    width: 80%;
-    max-width: 300px;
-    justify-content: center; /* Center the text inside the button */
-  }
-
-  /* --- Tracks Section --- */
-  .tracks-grid {
-    /* Switch to a single-column layout */
-    grid-template-columns: 1fr;
-  }
-
-  /* --- About & Contact Sections --- */
-  .about-content, .contact-info {
-    /* Switch to a single-column grid for cards */
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  /* --- Registration Form --- */
-  .register-container {
-    /* Reduce margin and padding for smaller screens */
-    margin: 40px 15px;
-    padding: 30px 20px;
-  }
-  
-  /* --- Footer --- */
-  .footer-content {
-    /* Stack footer items vertically */
-    flex-direction: column;
-    text-align: center;
-    gap: 25px;
-  }
-}
-
-
-/* --- For Small Mobile Phones --- */
-/* Applies when the screen width is 480px or less */
-@media (max-width: 480px) {
-  /* --- Hero Section --- */
-  .hero {
-    /* Reduce top padding on the smallest screens */
-    padding-top: 100px;
-  }
-  
-  .hero-title {
-    /* Further reduce font size for very small screens */
-    font-size: 2.2rem;
-  }
-  
-  .hero-badge, .participant-counter {
-    /* Adjust padding and font size for badges */
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-
-  .count-value {
-    font-size: 1.5rem;
-  }
-
-  .countdown-container {
-    /* Simplify countdown for small screens */
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .countdown-timer {
-    gap: 10px;
-  }
-
-  .time-unit {
-    min-width: 65px;
-    padding: 10px;
-  }
-
-  .time-value {
-    font-size: 1.5rem;
-  }
-
-  /* --- General Section Titles --- */
-  .section-title, .section-title1 {
-    font-size: 2rem;
-  }
-  
-  /* --- Registration Form --- */
-  .register-container h2 {
-    font-size: 1.8rem;
-  }
-}
-/* --- For Small Mobile Phones --- */
-/* Applies when the screen width is 480px or less */
-@media (max-width: 480px) {
-  /* --- Hero Section --- */
-  .hero {
-    padding-top: 100px;
-  }
-  
-  .hero-title {
-    font-size: 2.2rem;
-  }
-  
-  .hero-badge, .participant-counter {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-
-  .count-value {
-    font-size: 1.5rem;
-  }
-
-  /* --- Countdown Fix --- */
-  .countdown-container {
-    flex-direction: column;
-    gap: 15px;
-    width: 90%; /* Take up more of the available width */
-  }
-
-  .countdown-timer {
-    display: flex;
-    flex-wrap: wrap; /* <<< KEY FIX: Allow wrapping */
-    justify-content: center; /* <<< KEY FIX: Center the items */
-    gap: 10px;
-    width: 100%; /* Ensure the timer takes full width of its container */
-  }
-  /* End Countdown Fix --- */
-
-  .time-unit {
-    min-width: 70px; /* A bit more space for each box */
-    padding: 12px 5px; /* Adjust padding */
-  }
-
-  .time-value {
-    font-size: 1.6rem;
-  }
-
-  /* --- General Section Titles --- */
-  .section-title, .section-title1 {
-    font-size: 2rem;
-  }
-  
-  /* --- Registration Form --- */
-  .register-container h2 {
-    font-size: 1.8rem;
-  }
-}
-/* =================================== */
-/* ==   MODIFIED REGISTRATION FORM STYLES   == */
-/* =================================== */
-
-/* 1. Member Fields Layout
---------------------------------------*/
-/* This ensures the name input and gender selector are side-by-side and aligned */
-.member-fields {
-  display: flex;
-  align-items: center; /* Vertically align items */
-  gap: 16px;
-}
-
-/* The name input will now take up the available space */
-.member-fields > input[type="text"] {
-  flex: 1; /* Allows the input to grow */
-  min-width: 0; /* Prevents overflow issues in flex containers */
-}
-
-/* 2. Gender Selector Container
---------------------------------------*/
-.gender-selector {
-  display: flex;
-  gap: 8px; /* Spacing between radio buttons */
-  flex-shrink: 0; /* Prevents the container from shrinking */
-}
-
-/* 3. Custom Radio Button Styling
---------------------------------------*/
-.gender-selector label {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none; /* Prevents text selection on click */
-}
-
-/* Hide the default radio button */
-.gender-selector input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The visible part of the radio button (the text) */
-.gender-selector span {
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 1.3px solid #d1d5db;
-  background: #fff;
-  color: #786fa6;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-/* Style for when the radio is selected (checked) */
-.gender-selector input[type="radio"]:checked + span {
-  background: #786fa6; /* Purple background */
-  color: white;
-  border-color: #786fa6;
-}
-
-/* Style for hover effect */
-.gender-selector label:hover span {
-  border-color: #786fa6;
-}
-
-/* 4. Responsive adjustments
---------------------------------------*/
-@media (max-width: 540px) {
-  .member-fields {
-    flex-direction: column; /* Stack name and gender on top of each other */
-    align-items: stretch; /* Make children take full width */
-    gap: 12px;
-  }
-  
-  .gender-selector {
-    justify-content: space-between; /* Distribute radio buttons */
-  }
-
-  .gender-selector span {
-    flex: 1; /* Allow buttons to grow equally */
-    text-align: center;
-  }
-}
-
 .contact-info-text {
   text-align: center;
   margin-top: 20px;
   color: rgba(255, 255, 255, 0.8);
 }
-/* globals.css */
+
+
 /* =================================== */
-/* ==   PARTNERS / SPONSORS SECTION   == */
+/* ==      RESPONSIVE DESIGN        == */
 /* =================================== */
 
-.partners-section {
-  padding: 80px 0;
-  background: #f8fafc; /* A light, clean background */
+@media (max-width: 768px) {
+  /* Hide full nav menu, handled by JS logic */
+  .nav-menu {
+      display: none;
+  }
+  
+  /* Show only home button if it exists (for non-homepage) */
+  .nav-container .home-btn {
+      display: inline-block;
+  }
+  
+  .hero-details {
+      flex-direction: column;
+      gap: 20px;
+  }
+  
+  .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .countdown-timer {
+      gap: 15px;
+  }
+  
+  .time-unit {
+      min-width: 60px;
+      padding: 15px;
+  }
+  
+  .tracks-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .about-content, .contact-info {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .register-container {
+    margin: 34px 10px;
+    padding: 20px;
+  }
+
+  .member-fields {
+    flex-direction: column;
+  }
+  
+  .footer-content {
+      flex-direction: column;
+      text-align: center;
+  }
 }
 
-.logos-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 40px; /* Spacing between logos */
-  margin-top: 50px;
+@media (max-width: 540px) {
+  .member-fields {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .gender-selector {
+    justify-content: space-between;
+  }
+
+  .gender-selector span {
+    flex: 1;
+    text-align: center;
+  }
 }
 
-.logo-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-/* MODIFIED: This rule is now simpler */
-.logo-image {
-  object-fit: contain; /* Prevents logos from being stretched */
-  max-width: 160px;
-  /* Grayscale, opacity, and transition properties have been removed */
-}
+@media (max-width: 480px) {
+  .hero-title {
+      font-size: 2.2rem;
+  }
+  
+  .section-title, .section-title1 {
+      font-size: 2rem;
+  }
+  
+  .register-container h2 {
+    font-size: 1.8rem;
+  }
+  
+  .hero-badge, .participant-counter {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
 
-/* The :hover rule has been completely removed */
+  .count-value {
+    font-size: 1.5rem;
+  }
+
+  .countdown-container {
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+  }
+
+  .countdown-timer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .time-unit {
+    min-width: 70px;
+    padding: 12px 5px;
+  }
+
+  .time-value {
+    font-size: 1.6rem;
+  }
+}
