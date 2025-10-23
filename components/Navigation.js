@@ -34,7 +34,7 @@ export default function Navigation() {
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-logo">
-          <FontAwesomeIcon icon={faCode} />
+        
           <span>Mindsprint2K25</span>
         </div>
         <ul className="nav-menu">
