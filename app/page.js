@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import ParticipantCount from '../components/ParticipantCount';
 import Countdown from '@/components/Countdown';
-import Navigation from '@/components/Navigation';
+// The 'Navigation' import is removed as it's now in the global layout.
 
 export default function Home() {
   // Handler for smooth scroll on buttons within the page content
@@ -15,16 +15,16 @@ export default function Home() {
 
     if (targetElement) {
       window.scrollTo({
-        top: targetElement.offsetTop - 70, // Offset for the fixed navbar
+        // MODIFIED: Offset now accounts for both the fixed banner and navbar height (60px + 70px)
+        top: targetElement.offsetTop - 130, 
         behavior: 'smooth',
       });
     }
   };
 
   return (
+    // The <Navigation /> component is no longer here.
     <>
-      <Navigation />
-
       {/* Hero Section */}
       <section id="home" className="hero">
         <div className="hero-background">
@@ -39,7 +39,7 @@ export default function Home() {
         </div>
         <div className="hero-content">
           <div className="hero-badge">
-            <i class="fas fa-trophy"></i>
+            <i className="fas fa-trophy"></i>
             <span>36 Hours of Innovation</span>
           </div>
           <h1 className="hero-title">

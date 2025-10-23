@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
+// The 'Link' import is no longer needed here.
 
 export default function RegisterPage() {
   const [responseMsg, setResponseMsg] = useState({ text: '', type: '' });
@@ -86,30 +86,9 @@ export default function RegisterPage() {
   const memberCount = parseInt(formData.teamSize, 10) || 0;
 
   return (
-    <>
-      <header>
-        {/* Using the same 'navbar' and 'nav-container' classes ensures consistent layout */}
-        <nav className="navbar">
-          <div className="nav-container">
-            {/* 
-              This div uses the 'nav-logo' class from globals.css.
-              This is what styles the "Mindsprint2K25" text to be blue, bold, and larger,
-              exactly like on the home page.
-            */}
-            <div className="nav-logo">
-              <span>Mindsprint2K25</span>
-            </div>
-            
-            {/* 
-              The 'nav-container' uses flexbox with 'justify-content: space-between',
-              which pushes this Home button to the far right.
-            */}
-            <Link href="/" className="home-btn" style={{marginTop: '0', marginLeft: '0'}}>Home</Link>
-          </div>
-        </nav>
-      </header>
-
-      <main>
+    // The <header> and navbar have been removed from this file.
+    // They are now handled globally in app/layout.js.
+    <main>
         <div className="register-container">
           <h2>Hackathon Registration</h2>
           
@@ -212,7 +191,6 @@ export default function RegisterPage() {
               For any Queries contact hackathon@gmail.com
             </p>
         </div>
-      </main>
-    </>
+    </main>
   );
 }

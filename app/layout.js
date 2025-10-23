@@ -1,7 +1,6 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrophy } from '@fortawesome/free-solid-svg-icons';// Or use the new @fortawesome packages
+import Navigation from '@/components/Navigation'; // Import the Navigation component
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,7 +16,19 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        
+        {/* --- MODIFICATION START: Added Fixed Banner and Navigation --- */}
+        <div className="fixed-banner">
+          <img src="/college-banner.png" alt="College Banner" />
+        </div>
+        <Navigation />
+        {/* --- MODIFICATION END --- */}
+
+        {/* This will render the content of your individual pages */}
+        {children}
+
+      </body>
     </html>
   );
 }
