@@ -207,11 +207,4 @@ export default function RegisterPage() {
       </main>
     </>
   );
-}```
-
-
-.contact-info-text {
-  text-align: center;
-  margin-top: 20px;
-  color: rgba(255, 255, 255, 0.8);
 }
