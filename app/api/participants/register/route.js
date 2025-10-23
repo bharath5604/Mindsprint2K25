@@ -76,7 +76,7 @@ export async function POST(request) {
     const html = `<p>Hello <b>${participant.member1}</b>,</p><p>You have successfully registered for <b>Mindsprint 2K25</b> under the track: <b>${participant.track}</b>.</p><p>Thank you for registering!</p>`;
     // --- MODIFICATIONS END ---
     
-    sendMail(participant.email, subject, text, html);
+    await sendMail(participant.email, subject, text, html);
 
     return NextResponse.json({ message: "Registration successful! Confirmation email sent." });
   } catch (err) {
