@@ -1630,14 +1630,13 @@ body {
   color: rgba(255, 255, 255, 0.8);
 }
 /* globals.css */
-
 /* =================================== */
 /* ==   PARTNERS / SPONSORS SECTION   == */
 /* =================================== */
 
 .partners-section {
   padding: 80px 0;
-  background: #f8fafc;
+  background: #f8fafc; /* A light, clean background */
 }
 
 .logos-grid {
@@ -1645,7 +1644,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 40px; /* Spacing between logos */
   margin-top: 50px;
 }
 
@@ -1655,16 +1654,11 @@ body {
   align-items: center;
 }
 
+/* MODIFIED: This rule is now simpler */
 .logo-image {
-  object-fit: contain;
+  object-fit: contain; /* Prevents logos from being stretched */
   max-width: 160px;
-  filter: grayscale(100%);
-  opacity: 0.7;
-  transition: all 0.3s ease-in-out;
+  /* Grayscale, opacity, and transition properties have been removed */
 }
 
-.logo-item:hover .logo-image {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: scale(1.1);
-}
+/* The :hover rule has been completely removed */
