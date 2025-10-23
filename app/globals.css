@@ -39,18 +39,20 @@ body {
   left: 0;
   width: 100%;
   height: var(--banner-height);
-  background-color: #1a202c; /* Dark fallback background */
-  z-index: 1001; /* Must be higher than the navbar */
+  background-color: #ffffff; /* White background to match the banner image */
+  z-index: 1001;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  border-bottom: 1px solid #e2e8f0; /* Subtle line below the banner */
 }
 
 .fixed-banner img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image fills the banner space */
+  /* This is the key fix: It ensures the entire image is visible */
+  object-fit: contain;
 }
 
 /* Navigation */
@@ -130,7 +132,8 @@ body {
   position: relative;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   overflow: hidden;
-  padding-top: 30px; /* Extra spacing below the nav */
+  /* This is the key fix: Removing this padding gets rid of the extra space */
+  padding-top: 0;
 }
 
 .hero-content {
@@ -141,10 +144,10 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
+  /* This margin now correctly controls the space below the navbar */
   margin-top: 60px;
   animation: fadeInUp 1s ease-out;
 }
-
 
 .hero-background {
     position: absolute;
@@ -256,10 +259,9 @@ body {
     margin-left: 18px;
 }
 
-
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.77; }
 }
 
 .hero-title {
@@ -404,6 +406,7 @@ body {
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 .section-title1 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -413,6 +416,7 @@ body {
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 .section-subtitle {
     font-size: 1.25rem;
     color: #64748b;
@@ -722,7 +726,7 @@ body {
 
 .register-container {
   max-width: 700px;
-  margin: 20px auto; /* Adjusted margin */
+  margin: 20px auto;
   padding: 36px;
   background: linear-gradient(135deg, #574b90 0%, #786fa6 100%);
   backdrop-filter: blur(12px) brightness(1.12);
@@ -872,7 +876,6 @@ body {
   border-radius: 36px;
   text-decoration: none;
   box-shadow: 0 2px 8px rgba(59,130,246,0.09);
-  /* Removed margin-top and margin-left to be controlled by nav-container */
   transition: box-shadow 0.3s, transform 0.2s, background 0.18s;
 }
 
