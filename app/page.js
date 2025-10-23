@@ -167,7 +167,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+        <Partners />
       {/* Contact Section */}
       <section id="contact" className="contact-section">
         <div className="container">
