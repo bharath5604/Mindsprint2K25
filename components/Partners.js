@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const logos = [
   { src: '/logos/brainovision.png', alt: 'Partner Logo 1' },
-  { src: '/logos/brainovision.png', alt: 'Partner Logo 2' },
+  { src: '/logos/logo2.png', alt: 'Partner Logo 2' },
   { src: '/logos/logo3.png', alt: 'Partner Logo 3' },
   // Add more logos here
 ];

@@ -223,7 +223,7 @@ export default function Home() {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2025 Mindsprint2K25. All rights reserved. | Built with ❤️ for innovation at PSCMR College</p>
+            <p>&copy; 2025 Mindsprint2K25. All rights reserved. | Built with innovation at PSCMR College</p>
           </div>
         </div>
       </footer>
