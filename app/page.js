@@ -207,7 +207,6 @@ export default function Home() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-logo">
-              <i className="fas fa-code"></i>
               <span>Mindsprint2K25</span>
             </div>
             <div className="footer-links">
@@ -218,8 +217,7 @@ export default function Home() {
               <a href="#partners" onClick={handleSmoothScroll}>Partners</a>
             </div>
             <div className="footer-social">
-              <a href="#"><i className="fab fa-linkedin"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
+              <a href="https://www.instagram.com/mindsprint2k25_pscmr?utm_source=qr&igsh=MTVrZnVnaThsazhsMQ=="><i className="fab fa-instagram"></i></a>
             </div>
           </div>
           <div className="footer-bottom">
