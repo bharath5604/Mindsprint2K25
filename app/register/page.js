@@ -87,18 +87,27 @@ export default function RegisterPage() {
 
   return (
     <>
-      {/* --- MODIFICATION START: Updated Navbar --- */}
       <header>
+        {/* Using the same 'navbar' and 'nav-container' classes ensures consistent layout */}
         <nav className="navbar">
           <div className="nav-container">
+            {/* 
+              This div uses the 'nav-logo' class from globals.css.
+              This is what styles the "Mindsprint2K25" text to be blue, bold, and larger,
+              exactly like on the home page.
+            */}
             <div className="nav-logo">
               <span>Mindsprint2K25</span>
             </div>
+            
+            {/* 
+              The 'nav-container' uses flexbox with 'justify-content: space-between',
+              which pushes this Home button to the far right.
+            */}
             <Link href="/" className="home-btn" style={{marginTop: '0', marginLeft: '0'}}>Home</Link>
           </div>
         </nav>
       </header>
-      {/* --- MODIFICATION END --- */}
 
       <main>
         <div className="register-container">
@@ -199,7 +208,6 @@ export default function RegisterPage() {
                 
                 <button type="submit">Register</button>
             </form>
-            {/* --- MODIFICATION: Using a CSS class for the contact text --- */}
             <p className="contact-info-text">
               For any Queries contact hackathon@gmail.com
             </p>
