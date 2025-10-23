@@ -91,16 +91,35 @@ export default function RegisterPage() {
       <main>
         <div className="register-container">
           <h2>Hackathon Registration</h2>
+
+          {/* --- MODIFICATION START: Attractive deadline display --- */}
+          <div style={{
+            textAlign: 'center',
+            padding: '10px 15px',
+            backgroundColor: 'rgba(251, 191, 36, 0.15)',
+            borderRadius: '10px',
+            border: '1px solid rgba(251, 191, 36, 0.3)',
+            color: '#fbbf24',
+            fontWeight: '600',
+            fontSize: '1rem',
+            marginBottom: '15px',
+            fontFamily: 'Inter, sans-serif'
+          }}>
+            Registrations close on November 30, 2025
+          </div>
+          {/* --- MODIFICATION END --- */}
+
           <div id="responseMsg" style={{ color: responseMsg.type === 'success' ? '#16a34a' : '#dc2626', opacity: responseMsg.text ? 1 : 0, transition: 'opacity 0.3s' }}>
             {responseMsg.text}
           </div>
           <form id="registrationForm" onSubmit={handleSubmit}>
-                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="College Name" required />
+                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="College / School Name" required />
                 <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
                 <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />
                 
                 <select name="department" value={formData.department} onChange={handleChange} required>
                     <option value="">Select Department / Degree</option>
+                    <option value="School">School</option>
                     <option value="CSE">BTech CSE / CSE Allied Branches</option>
                     <option value="ECE">BTech ECE</option>
                     <option value="EEE">BTech EEE</option>
@@ -131,7 +150,6 @@ export default function RegisterPage() {
                     <option value="3">3</option>
                 </select>
                 
-                {/* --- MODIFICATIONS START: Radio Buttons for Gender --- */}
                 {memberCount >= 1 && (
                   <div className="member-fields">
                     <input type="text" name="member1" value={formData.member1} onChange={handleChange} placeholder="1st Member Name" required />
@@ -164,7 +182,6 @@ export default function RegisterPage() {
                     </div>
                   </div>
                 )}
-                {/* --- MODIFICATIONS END --- */}
 
                 <input type="text" name="member1Phone" value={formData.member1Phone} onChange={handleChange} placeholder="1st Member Phone" required />
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
@@ -172,6 +189,9 @@ export default function RegisterPage() {
                 
                 <button type="submit">Register</button>
             </form>
+            <p style={{ textAlign: 'center', marginTop: '20px', color: 'rgba(255, 255, 255, 0.8)' }}>
+              For any Queries contact hackathon@gmail.com
+            </p>
         </div>
       </main>
     </>
