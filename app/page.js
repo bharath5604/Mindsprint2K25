@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import ParticipantCount from '../components/ParticipantCount';
 import Countdown from '@/components/Countdown';
+import Partners from '@/components/Partners';
 // The 'Navigation' import is removed as it's now in the global layout.
 
 export default function Home() {
@@ -76,7 +77,7 @@ export default function Home() {
           <Countdown />
         </div>
       </section>
-
+     <Partners />
       {/* About Section */}
       <section id="about" className="about-section">
         <div className="container">

@@ -1629,3 +1629,42 @@ body {
   margin-top: 20px;
   color: rgba(255, 255, 255, 0.8);
 }
+/* globals.css */
+
+/* =================================== */
+/* ==   PARTNERS / SPONSORS SECTION   == */
+/* =================================== */
+
+.partners-section {
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.logos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-image {
+  object-fit: contain;
+  max-width: 160px;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-item:hover .logo-image {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.1);
+}
