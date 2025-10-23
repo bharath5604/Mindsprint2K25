@@ -23,7 +23,7 @@ export default function ParticipantCount() {
   return (
     <div className="hero-badge participant-counter">
       <i className="fas fa-users"></i>
-      <span>Total Participants Registered:</span>
+      <span>Total Teams Registered:</span>
       <span className="count-value">{count}</span>
     </div>
   );
