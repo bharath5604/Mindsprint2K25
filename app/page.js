@@ -215,6 +215,7 @@ export default function Home() {
               <a href="#about" onClick={handleSmoothScroll}>About</a>
               <a href="#tracks" onClick={handleSmoothScroll}>Tracks</a>
               <a href="#contact" onClick={handleSmoothScroll}>Contact</a>
+              <a href="#partners" onClick={handleSmoothScroll}>Partners</a>
             </div>
             <div className="footer-social">
               <a href="#"><i className="fab fa-linkedin"></i></a>
