@@ -87,12 +87,23 @@ export default function RegisterPage() {
 
   return (
     <>
-      <header><nav className="navbar"><Link href="/" className="home-btn">Home</Link></nav></header>
+      {/* --- MODIFICATION START: Updated Navbar --- */}
+      <header>
+        <nav className="navbar">
+          <div className="nav-container">
+            <div className="nav-logo">
+              <span>Mindsprint2K25</span>
+            </div>
+            <Link href="/" className="home-btn" style={{marginTop: '0', marginLeft: '0'}}>Home</Link>
+          </div>
+        </nav>
+      </header>
+      {/* --- MODIFICATION END --- */}
+
       <main>
         <div className="register-container">
           <h2>Hackathon Registration</h2>
-
-          {/* --- MODIFICATION START: Attractive deadline display --- */}
+          
           <div style={{
             textAlign: 'center',
             padding: '10px 15px',
@@ -107,7 +118,6 @@ export default function RegisterPage() {
           }}>
             Registrations close on November 30, 2025
           </div>
-          {/* --- MODIFICATION END --- */}
 
           <div id="responseMsg" style={{ color: responseMsg.type === 'success' ? '#16a34a' : '#dc2626', opacity: responseMsg.text ? 1 : 0, transition: 'opacity 0.3s' }}>
             {responseMsg.text}
@@ -189,11 +199,19 @@ export default function RegisterPage() {
                 
                 <button type="submit">Register</button>
             </form>
-            <p style={{ textAlign: 'center', marginTop: '20px', color: 'rgba(255, 255, 255, 0.8)' }}>
+            {/* --- MODIFICATION: Using a CSS class for the contact text --- */}
+            <p className="contact-info-text">
               For any Queries contact hackathon@gmail.com
             </p>
         </div>
       </main>
     </>
   );
+}```
+
+
+.contact-info-text {
+  text-align: center;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.8);
 }
