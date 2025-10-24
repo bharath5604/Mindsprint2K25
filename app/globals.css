@@ -42,9 +42,9 @@ body {
   background-color: #ffffff;
   z-index: 1001;
   display: flex;
-  /* MODIFICATION START: Changed layout for better balance */
+  /* MODIFICATION START: Center content and add spacing */
   justify-content: center;
-  gap: 30px; 
+  gap: 40px; 
   /* MODIFICATION END */
   align-items: center;
   padding: 0 25px;
@@ -59,46 +59,57 @@ body {
   text-align: center;
 }
 
-/* MODIFICATION START: Improved typography and style */
+/* MODIFICATION START: Enhanced typography and style */
 .banner-details h2 {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 1.2rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
   color: #0d47a1; /* Deep, professional blue */
-  text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Subtle shadow for depth */
   margin: 0;
   line-height: 1.2;
 }
 
 .banner-details h3 {
   font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-weight: 500;
   color: #1a237e; /* Slightly lighter blue */
   margin: 2px 0;
   line-height: 1.2;
 }
 
 .banner-details p {
-  font-size: 0.75rem; /* Made slightly larger for readability */
+  font-size: 0.7rem;
   font-weight: 500;
-  color: #555555; /* Softer gray */
-  margin: 2px 0 0 0;
+  color: #616161; /* Softer gray */
+  margin: 3px 0 0 0;
   line-height: 1.1;
 }
-/* MODIFICATION END */
 
 .banner-accreditations {
   display: flex;
-  align-items: center;
-  gap: 20px;
+  align-items: flex-start; /* Align to the top */
+  gap: 25px;
   flex-shrink: 0;
 }
 
-.accreditation-logo {
+/* New class for each accreditation block */
+.accreditation-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.accreditation-item img {
   object-fit: contain;
 }
+
+.accreditation-item span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #333;
+}
+/* MODIFICATION END */
 
 
 /* Navigation (This remains the same) */
@@ -109,38 +120,37 @@ body {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1.5px solid rgba(255,255,255,0.25);
-  box-shadow: 0 8px 32px rgba(102,126,234,0.10);
+  box-shadow: 0 8px 32px rgba(102,126,240,0.10);
   z-index: 1000;
   transition: all 0.3s ease;
 }
 
-/* --- Responsive adjustments for the new banner (remains the same) --- */
+/* --- Responsive adjustments --- */
+@media (max-width: 1024px) {
+  .banner-details h2 { font-size: 1rem; }
+  .banner-details h3 { font-size: 0.7rem; }
+  .attractive-banner { gap: 20px; }
+}
+
+
 @media (max-width: 900px) {
-  .banner-details h2 {
-    font-size: 0.9rem;
-  }
-  .banner-details h3 {
-    font-size: 0.7rem;
-  }
   .banner-details p {
-    display: none;
+    display: none; /* Hide least important text */
   }
-  .attractive-banner {
-    padding: 0 15px;
-    gap: 20px;
-  }
+}
+
+@media (max-width: 768px) {
   .banner-accreditations {
-    gap: 10px;
+    display: none; /* Hide accreditation logos for more space */
   }
 }
 
 @media (max-width: 600px) {
-  .banner-accreditations {
-    display: none;
+  .banner-logo {
+    display: none; /* Hide main logo on smallest screens */
   }
   .attractive-banner {
     justify-content: center;
-    gap: 15px;
   }
 }
 

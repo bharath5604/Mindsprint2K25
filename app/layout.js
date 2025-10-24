@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
-import Image from 'next/image'; // Import the Image component
+import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,25 +19,30 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         
-        {/* --- MODIFICATION START: New Attractive Banner --- */}
         <div className="attractive-banner">
           <div className="banner-logo">
-            <Image src="/logos/college-logo.png" alt="College Logo" width={60} height={60} />
+            <Image src="/logos/college-logo.png" alt="College Logo" width={65} height={65} />
           </div>
 
           <div className="banner-details">
-            <h2>POTTI SRIRAMULU CHALAVADI MALLIKARJUNA RAO</h2>
-            <h3>COLLEGE OF ENGINEERING & TECHNOLOGY (AUTONOMOUS)</h3>
-            <p>Sponsored by SKPVV Hindu High Schools Committee. Estd: 1906</p>
-            <p>Approved by AICTE, New Delhi, Affiliated to JNTU Kakinada</p>
+            <h2>Potti Sriramulu Chalavadi Mallikarjuna Rao</h2>
+            <h3>College of Engineering & Technology (Autonomous)</h3>
+            <p>Sponsored by SKPVV Hindu High Schools Committee, Estd: 1906 | Approved by AICTE | Affiliated to JNTU Kakinada</p>
           </div>
 
+          {/* --- MODIFICATION START: Improved structure for accreditation logos --- */}
           <div className="banner-accreditations">
-            <Image src="/logos/naac-logo.png" alt="NAAC A++ Logo" width={60} height={60} className="accreditation-logo" />
-            <Image src="/logos/nba-logo.png" alt="NBA Logo" width={80} height={60} className="accreditation-logo" />
+            <div className="accreditation-item">
+              <Image src="/logos/naac-logo.png" alt="NAAC Logo" width={50} height={50} />
+              <span>A++ Grade</span>
+            </div>
+            <div className="accreditation-item">
+              <Image src="/logos/nba-logo.png" alt="NBA Logo" width={70} height={50} />
+              <span>Accredited</span>
+            </div>
           </div>
+          {/* --- MODIFICATION END --- */}
         </div>
-        {/* --- MODIFICATION END --- */}
         
         <Navigation />
         
