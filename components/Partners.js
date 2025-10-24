@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 const logos = [
-  { src: 'public/logos/brainovision.png', alt: 'Partner Logo 1' },
+  { src: '/logos/brainovision.png', alt: 'Partner Logo 1' },
   // Add more logos here
 ];
 
