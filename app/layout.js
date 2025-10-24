@@ -34,11 +34,9 @@ export default function RootLayout({ children }) {
           <div className="banner-accreditations">
             <div className="accreditation-item">
               <Image src="/logos/naac-logo.png" alt="NAAC Logo" width={60} height={60} />
-              <span>A++ Grade</span>
             </div>
             <div className="accreditation-item">
               <Image src="/logos/nba.jpg" alt="NBA Logo" width={70} height={70} />
-              <span>Accredited</span>
             </div>
           </div>
         </div>
