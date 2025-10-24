@@ -27,7 +27,7 @@ export default function Partners() {
                 src={logo.src}
                 alt={logo.alt}
                 width={150}
-                height={75}
+                height={80}
                 className="logo-image"
               />
             </div>
