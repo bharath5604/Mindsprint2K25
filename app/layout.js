@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
               <Image src="/logos/naac-logo.png" alt="NAAC Logo" width={60} height={60} />
             </div>
             <div className="accreditation-item">
-              <Image src="/logos/nba.jpg" alt="NBA Logo" width={70} height={70} />
+              <Image src="/logos/nba.jpg" alt="NBA Logo" width={70} height={60} />
             </div>
           </div>
         </div>
