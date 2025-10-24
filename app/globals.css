@@ -1147,11 +1147,11 @@ body {
     padding: 0 10px;
   }
   
-  .banner-accreditations,
+  /* .banner-accreditations,
   .banner-details h3,
   .banner-details p {
     display: none;
-  }
+  } */
 
   .banner-logo img {
     width: 50px;
