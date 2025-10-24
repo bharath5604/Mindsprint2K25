@@ -5,10 +5,7 @@ import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-  title: 'Mindsprint2k25 - 36 Hour Hackathon',
-  description: 'Join the ultimate coding challenge where innovation meets creativity. Build, compete, and win!',
-};
+export const metadata = { /* ... */ };
 
 export default function RootLayout({ children }) {
   return (
@@ -19,34 +16,32 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         
-        {/* --- MODIFICATION START: Corrected Banner Structure --- */}
         <div className="attractive-banner">
           <div className="banner-logo">
-            <Image src="/logos/college-logo.jpeg" alt="College Logo" width={65} height={65} />
+            <Image src="/logos/college-logo.png" alt="College Logo" width={65} height={65} />
           </div>
-
           <div className="banner-details">
             <h2>Potti Sriramulu Chalavadi Mallikarjuna Rao</h2>
             <h3>College of Engineering & Technology (Autonomous)</h3>
             <p>Sponsored by SKPVV Hindu High Schools Committee | Approved by AICTE | Affiliated to JNTU Kakinada</p>
           </div>
-
           <div className="banner-accreditations">
             <div className="accreditation-item">
-              <Image src="/logos/naac-logo.png" alt="NAAC Logo" width={60} height={60} />
+              <Image src="/logos/naac-logo.png" alt="NAAC Logo" width={50} height={50} />
+              <span>A++ Grade</span>
             </div>
             <div className="accreditation-item">
-              <Image src="/logos/nba.jpg" alt="NBA Logo" width={70} height={50} />
+              <Image src="/logos/nba-logo.png" alt="NBA Logo" width={70} height={50} />
+              <span>Accredited</span>
             </div>
           </div>
         </div>
-        {/* --- MODIFICATION END --- */}
         
         <Navigation />
-        
-        {children}
 
+        {children}
       </body>
+      
     </html>
   );
 }
