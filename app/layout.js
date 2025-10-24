@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         
         <div className="attractive-banner">
           <div className="banner-logo">
-            <Image src="/logos/college-logo.png" alt="College Logo" width={65} height={65} />
+            <Image src="/logos/college-logo.jpeg" alt="College Logo" width={65} height={65} />
           </div>
           <div className="banner-details">
             <h2>Potti Sriramulu Chalavadi Mallikarjuna Rao</h2>
