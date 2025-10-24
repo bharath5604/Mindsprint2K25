@@ -1148,11 +1148,11 @@ body {
   }
   
   /* Hide unnecessary elements to make space */
-  .banner-accreditations,
+  /* .banner-accreditations,
   .banner-details h3,
   .banner-details p {
     display: none;
-  }
+  } */
 
   /* Adjust remaining elements */
   .banner-logo img {
