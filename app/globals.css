@@ -42,7 +42,10 @@ body {
   background-color: #ffffff;
   z-index: 1001;
   display: flex;
-  justify-content: space-between;
+  /* MODIFICATION START: Changed layout for better balance */
+  justify-content: center;
+  gap: 30px; 
+  /* MODIFICATION END */
   align-items: center;
   padding: 0 25px;
   border-bottom: 1px solid #e2e8f0;
@@ -54,40 +57,91 @@ body {
 
 .banner-details {
   text-align: center;
-  color: #0d47a1; /* A deep blue for the text */
 }
 
+/* MODIFICATION START: Improved typography and style */
 .banner-details h2 {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0d47a1; /* Deep, professional blue */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Subtle shadow for depth */
   margin: 0;
   line-height: 1.2;
 }
 
 .banner-details h3 {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  margin: 0;
+  text-transform: uppercase;
+  color: #1a237e; /* Slightly lighter blue */
+  margin: 2px 0;
   line-height: 1.2;
 }
 
 .banner-details p {
-  font-size: 0.7rem;
+  font-size: 0.75rem; /* Made slightly larger for readability */
   font-weight: 500;
-  color: #424242; /* Dark gray for subtext */
+  color: #555555; /* Softer gray */
   margin: 2px 0 0 0;
   line-height: 1.1;
 }
+/* MODIFICATION END */
 
 .banner-accreditations {
   display: flex;
   align-items: center;
-  gap: 20px; /* Space between NAAC and NBA logos */
+  gap: 20px;
   flex-shrink: 0;
 }
 
 .accreditation-logo {
   object-fit: contain;
+}
+
+
+/* Navigation (This remains the same) */
+.navbar {
+  position: fixed;
+  top: var(--banner-height);
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid rgba(255,255,255,0.25);
+  box-shadow: 0 8px 32px rgba(102,126,234,0.10);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* --- Responsive adjustments for the new banner (remains the same) --- */
+@media (max-width: 900px) {
+  .banner-details h2 {
+    font-size: 0.9rem;
+  }
+  .banner-details h3 {
+    font-size: 0.7rem;
+  }
+  .banner-details p {
+    display: none;
+  }
+  .attractive-banner {
+    padding: 0 15px;
+    gap: 20px;
+  }
+  .banner-accreditations {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner-accreditations {
+    display: none;
+  }
+  .attractive-banner {
+    justify-content: center;
+    gap: 15px;
+  }
 }
 
 
