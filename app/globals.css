@@ -3,8 +3,9 @@
 /* =================================== */
 
 :root {
-  --banner-height: 80px; /* Controls the height of the top banner */
-  --navbar-height: 70px; /* The height of the navigation bar */
+  /* Default (Desktop) heights */
+  --banner-height: 80px;
+  --navbar-height: 70px;
 }
 
 /* Reset and Base Styles */
@@ -19,7 +20,7 @@ body {
     line-height: 1.6;
     color: #1a202c;
     overflow-x: hidden;
-    /* This padding prevents content from hiding behind the fixed banner and nav */
+    /* Default (Desktop) padding */
     padding-top: calc(var(--banner-height) + var(--navbar-height));
 }
 
@@ -42,13 +43,12 @@ body {
   background-color: #ffffff;
   z-index: 1001;
   display: flex;
-  /* MODIFICATION START: Center content and add spacing */
   justify-content: center;
-  gap: 40px; 
-  /* MODIFICATION END */
+  gap: 40px;
   align-items: center;
   padding: 0 25px;
   border-bottom: 1px solid #e2e8f0;
+  transition: height 0.3s ease;
 }
 
 .banner-logo {
@@ -59,12 +59,11 @@ body {
   text-align: center;
 }
 
-/* MODIFICATION START: Enhanced typography and style */
 .banner-details h2 {
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #0d47a1; /* Deep, professional blue */
+  color: #0d47a1;
   margin: 0;
   line-height: 1.2;
 }
@@ -72,7 +71,7 @@ body {
 .banner-details h3 {
   font-size: 0.8rem;
   font-weight: 500;
-  color: #1a237e; /* Slightly lighter blue */
+  color: #1a237e;
   margin: 2px 0;
   line-height: 1.2;
 }
@@ -80,19 +79,18 @@ body {
 .banner-details p {
   font-size: 0.7rem;
   font-weight: 500;
-  color: #616161; /* Softer gray */
+  color: #616161;
   margin: 3px 0 0 0;
   line-height: 1.1;
 }
 
 .banner-accreditations {
   display: flex;
-  align-items: flex-start; /* Align to the top */
+  align-items: flex-start;
   gap: 25px;
   flex-shrink: 0;
 }
 
-/* New class for each accreditation block */
 .accreditation-item {
   display: flex;
   flex-direction: column;
@@ -109,10 +107,8 @@ body {
   font-weight: 600;
   color: #333;
 }
-/* MODIFICATION END */
 
-
-/* Navigation (This remains the same) */
+/* Navigation */
 .navbar {
   position: fixed;
   top: var(--banner-height);
@@ -120,52 +116,9 @@ body {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1.5px solid rgba(255,255,255,0.25);
-  box-shadow: 0 8px 32px rgba(102,126,240,0.10);
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-/* --- Responsive adjustments --- */
-@media (max-width: 1024px) {
-  .banner-details h2 { font-size: 1rem; }
-  .banner-details h3 { font-size: 0.7rem; }
-  .attractive-banner { gap: 20px; }
-}
-
-
-@media (max-width: 900px) {
-  .banner-details p {
-    display: none; /* Hide least important text */
-  }
-}
-
-@media (max-width: 768px) {
-  .banner-accreditations {
-    display: none; /* Hide accreditation logos for more space */
-  }
-}
-
-@media (max-width: 600px) {
-  .banner-logo {
-    display: none; /* Hide main logo on smallest screens */
-  }
-  .attractive-banner {
-    justify-content: center;
-  }
-}
-
-
-/* Navigation */
-.navbar {
-  position: fixed;
-  top: var(--banner-height); /* Positioned exactly below the new banner */
-  width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1.5px solid rgba(255,255,255,0.25);
   box-shadow: 0 8px 32px rgba(102,126,234,0.10);
   z-index: 1000;
-  transition: all 0.3s ease;
+  transition: top 0.3s ease;
 }
 
 .nav-container {
@@ -185,6 +138,11 @@ body {
     font-weight: 700;
     color: #3b82f6;
     gap: 8px;
+}
+
+/* Hide mobile button by default on desktop */
+.mobile-register-button {
+  display: none;
 }
 
 .nav-menu {
@@ -212,13 +170,13 @@ body {
     border-radius: 25px;
     font-weight: 600;
     transition: all 0.3s ease;
+    white-space: nowrap; /* Prevents text wrapping */
 }
 
 .register-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
 }
-
 
 /* =================================== */
 /* ==         PAGE SECTIONS         == */
@@ -716,7 +674,6 @@ body {
   max-width: 160px;
 }
 
-
 /* Contact Section */
 .contact-section {
     padding: 100px 0;
@@ -837,7 +794,6 @@ body {
     border-top: 1px solid #2d3748;
     color: #a0aec0;
 }
-
 
 /* =================================== */
 /* ==      REGISTRATION PAGE        == */
@@ -1023,7 +979,6 @@ body {
   align-items: center;
   font-family: 'Inter', sans-serif;
   padding: 20px;
-  /* Reset body padding for admin page since it doesn't have the banner */
   padding-top: 20px;
 }
 
@@ -1163,91 +1118,49 @@ body {
   margin-bottom: 10px;
 }
 
-
 /* =================================== */
 /* ==      RESPONSIVE DESIGN        == */
 /* =================================== */
 
-@media (max-width: 900px) {
-  .banner-details h2 {
-    font-size: 0.9rem;
-  }
-  .banner-details h3 {
-    font-size: 0.7rem;
-  }
-  .banner-details p {
-    display: none;
-  }
-  .attractive-banner {
-    padding: 0 15px;
-  }
-  .banner-accreditations {
-    gap: 10px;
-  }
+@media (max-width: 1024px) {
+  .banner-details h2 { font-size: 1rem; }
+  .banner-details h3 { font-size: 0.7rem; }
+  .attractive-banner { gap: 20px; }
 }
 
 @media (max-width: 768px) {
-  /* Hide full nav menu, handled by JS logic */
-  .nav-menu {
-      display: none;
+  :root {
+    --banner-height: 60px;
   }
-  
-  /* Show only home button if it exists (for non-homepage) */
-  .nav-container .home-btn {
-      display: inline-block;
-  }
-  
-  .hero-details {
-      flex-direction: column;
-      gap: 20px;
-  }
-  
-  .hero-buttons {
-      flex-direction: column;
-      align-items: center;
-  }
-  
-  .countdown-timer {
-      gap: 15px;
-  }
-  
-  .time-unit {
-      min-width: 60px;
-      padding: 15px;
-  }
-  
-  .tracks-grid {
-      grid-template-columns: 1fr;
-  }
-  
-  .about-content, .contact-info {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .register-container {
-    margin: 34px 10px;
-    padding: 20px;
-  }
-
-  .member-fields {
-    flex-direction: column;
-  }
-  
-  .footer-content {
-      flex-direction: column;
-      text-align: center;
-  }
-}
-
-@media (max-width: 600px) {
-  .banner-accreditations {
-    display: none;
+  body {
+    padding-top: calc(var(--banner-height) + var(--navbar-height));
   }
   .attractive-banner {
-    justify-content: center;
+    justify-content: flex-start;
     gap: 15px;
   }
+  .banner-accreditations,
+  .banner-details h3,
+  .banner-details p {
+    display: none;
+  }
+  .banner-details h2 {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+  .desktop-menu-container {
+    display: none;
+  }
+  .mobile-register-button {
+    display: block;
+  }
+  .hero-details { flex-direction: column; gap: 20px; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .tracks-grid { grid-template-columns: 1fr; }
+  .about-content, .contact-info { grid-template-columns: 1fr; gap: 30px; }
+  .register-container { margin: 34px 10px; padding: 20px; }
+  .member-fields { flex-direction: column; }
+  .footer-content { flex-direction: column; text-align: center; }
 }
 
 @media (max-width: 540px) {
@@ -1256,59 +1169,23 @@ body {
     align-items: stretch;
     gap: 12px;
   }
-  
   .gender-selector {
     justify-content: space-between;
   }
-
   .gender-selector span {
     flex: 1;
     text-align: center;
   }
 }
 
-
 @media (max-width: 480px) {
-  .hero-title {
-      font-size: 2.2rem;
-  }
-  
-  .section-title, .section-title1 {
-      font-size: 2rem;
-  }
-  
-  .register-container h2 {
-    font-size: 1.8rem;
-  }
-  
-  .hero-badge, .participant-counter {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-
-  .count-value {
-    font-size: 1.5rem;
-  }
-
-  .countdown-container {
-    flex-direction: column;
-    gap: 15px;
-    width: 90%;
-  }
-
-  .countdown-timer {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .time-unit {
-    min-width: 70px;
-    padding: 12px 5px;
-  }
-
-  .time-value {
-    font-size: 1.6rem;
-  }
+  .hero-title { font-size: 2.2rem; }
+  .section-title, .section-title1 { font-size: 2rem; }
+  .register-container h2 { font-size: 1.8rem; }
+  .hero-badge, .participant-counter { padding: 8px 16px; font-size: 0.9rem; }
+  .count-value { font-size: 1.5rem; }
+  .countdown-container { flex-direction: column; gap: 15px; width: 90%; }
+  .countdown-timer { flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; }
+  .time-unit { min-width: 70px; padding: 12px 5px; }
+  .time-value { font-size: 1.6rem; }
 }
