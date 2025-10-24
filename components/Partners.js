@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 const logos = [
-  { src: 'public/logos/logos1.jpg', alt: 'Partner Logo 1' },
+  { src: 'public/logos/sponsors.jpg', alt: 'Partner Logo 1' },
   // Add more logos here
 ];
 
