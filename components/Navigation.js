@@ -12,7 +12,7 @@ export default function Navigation() {
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
-      // The offset is now always the desktop value (80px banner + 70px nav)
+      // Offset is now always the desktop value (80px banner + 70px nav)
       const offset = 150; 
       
       const elementPosition = targetElement.getBoundingClientRect().top;
@@ -26,14 +26,13 @@ export default function Navigation() {
   };
 
   return (
-    // This entire <nav> element will be hidden on mobile by the CSS
+    // This entire <nav> element is now hidden on mobile by the CSS
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-logo">
           <span>Mindsprint2K25</span>
         </div>
 
-        {/* This is now the only view, as mobile is handled by CSS */}
         {pathname === '/' ? (
           <ul className="nav-menu">
             <li><a href="#home" onClick={handleSmoothScroll}>Home</a></li>
