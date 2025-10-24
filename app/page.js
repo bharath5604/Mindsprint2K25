@@ -284,7 +284,7 @@ export default function Home() {
             <div className="contact-card">
               <i className="fas fa-envelope"></i>
               <h3>Email</h3>
-              <p>hackathon2025@pscmr.ac.in</p>
+              <p>pscmrmindsprint2k25@gmail.com</p>
             </div>
             <div className="contact-card">
               <i className="fas fa-phone"></i>
