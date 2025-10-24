@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
               <span>A++ Grade</span>
             </div>
             <div className="accreditation-item">
-              <Image src="/logos/nba.jpg" alt="NBA Logo" width={70} height={50} />
+              <Image src="/logos/nba.jpg" alt="NBA Logo" width={70} height={70} />
               <span>Accredited</span>
             </div>
           </div>
