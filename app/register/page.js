@@ -188,7 +188,7 @@ export default function RegisterPage() {
                 <button type="submit">Register</button>
             </form>
             <p className="contact-info-text">
-              For any Queries contact hackathon@gmail.com
+              For any Queries contact pscmrmindsprint2k25@gmail.com
             </p>
         </div>
     </main>
