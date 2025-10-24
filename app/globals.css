@@ -33,31 +33,68 @@ body {
 /* ==      FIXED HEADER & NAV       == */
 /* =================================== */
 
-.fixed-banner {
+.attractive-banner {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: var(--banner-height);
-  background-color: #ffffff; /* White background to match the banner image */
+  background-color: #ffffff;
   z-index: 1001;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  overflow: hidden;
-  border-bottom: 1px solid #e2e8f0; /* Subtle line below the banner */
+  padding: 0 25px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.fixed-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensures the entire image is visible */
+.banner-logo {
+  flex-shrink: 0;
 }
+
+.banner-details {
+  text-align: center;
+  color: #0d47a1; /* A deep blue for the text */
+}
+
+.banner-details h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.banner-details h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.banner-details p {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #424242; /* Dark gray for subtext */
+  margin: 2px 0 0 0;
+  line-height: 1.1;
+}
+
+.banner-accreditations {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between NAAC and NBA logos */
+  flex-shrink: 0;
+}
+
+.accreditation-logo {
+  object-fit: contain;
+}
+
 
 /* Navigation */
 .navbar {
   position: fixed;
-  top: var(--banner-height); /* Positioned exactly below the banner */
+  top: var(--banner-height); /* Positioned exactly below the new banner */
   width: 100%;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
@@ -142,7 +179,7 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
-  margin-top: 20px; /* Reduced from 60px to fix the gap */
+  margin-top: 20px;
   animation: fadeInUp 1s ease-out;
 }
 
@@ -487,11 +524,10 @@ body {
     gap: 30px;
 }
 
-/* New styles for the flip effect */
 .track-card {
     background-color: transparent;
     min-height: 250px;
-    perspective: 1000px; /* Creates the 3D space */
+    perspective: 1000px;
     cursor: pointer;
 }
 
@@ -504,7 +540,6 @@ body {
     transform-style: preserve-3d;
 }
 
-/* This class will be toggled by JavaScript to flip the card */
 .track-card.is-flipped .track-card-inner {
     transform: rotateY(180deg);
 }
@@ -513,7 +548,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
@@ -556,7 +591,6 @@ body {
     color: #64748b;
 }
 
-/* Original track card content styles */
 .track-icon {
     width: 80px;
     height: 80px;
@@ -566,7 +600,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    color: white; /* Icon color is now just white */
+    color: white;
 }
 
 .track-card-front h3 {
@@ -1070,6 +1104,24 @@ body {
 /* ==      RESPONSIVE DESIGN        == */
 /* =================================== */
 
+@media (max-width: 900px) {
+  .banner-details h2 {
+    font-size: 0.9rem;
+  }
+  .banner-details h3 {
+    font-size: 0.7rem;
+  }
+  .banner-details p {
+    display: none;
+  }
+  .attractive-banner {
+    padding: 0 15px;
+  }
+  .banner-accreditations {
+    gap: 10px;
+  }
+}
+
 @media (max-width: 768px) {
   /* Hide full nav menu, handled by JS logic */
   .nav-menu {
@@ -1121,6 +1173,16 @@ body {
   .footer-content {
       flex-direction: column;
       text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner-accreditations {
+    display: none;
+  }
+  .attractive-banner {
+    justify-content: center;
+    gap: 15px;
   }
 }
 
