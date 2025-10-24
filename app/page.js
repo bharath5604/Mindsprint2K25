@@ -22,7 +22,10 @@ export default function Home() {
       });
     }
   };
-
+   // --- MODIFICATION: ADD THIS FUNCTION FOR THE FLIP EFFECT ---
+  const handleCardFlip = (e) => {
+    e.currentTarget.classList.toggle('is-flipped');
+  };
   return (
     // The <Navigation /> component is no longer here.
     <>
@@ -112,58 +115,160 @@ export default function Home() {
       </section>
 
       {/* Tracks Section */}
+       {/* Tracks Section */}
       <section id="tracks" className="tracks-section">
         <div className="container">
           <div className="section-header">
             <h2 className="section-title1">Hackathon Tracks</h2>
             <p className="section-subtitle">Choose your domain and start building the future</p>
           </div>
+          {/* --- MODIFICATION: REPLACE THE ENTIRE .tracks-grid DIV --- */}
           <div className="tracks-grid">
-            <div className="track-card" data-track="ai-ml">
-              <div className="track-icon ai-ml"><i className="fas fa-brain"></i></div>
-              <h3>Intellect Innovators (AI & ML)</h3>
-              <p>Artificial Intelligence & Machine Learning.</p>
+            
+            {/* Card 1: AI & ML */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon ai-ml"><i className="fas fa-brain"></i></div>
+                  <h3>Intellect Innovators</h3>
+                  <p>Artificial Intelligence & Machine Learning.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>AI & ML</h3>
+                  <p>Dive into data science, neural networks, and predictive modeling. Build intelligent systems that learn, adapt, and solve complex problems using NLP, computer vision, or reinforcement learning.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
-            <div className="track-card" data-track="iot-robotics">
-              <div className="track-icon robotics"><i className="fas fa-robot"></i></div>
-              <h3>Bot Builds (IoT, Robotics & Automation)</h3>
-              <p>IoT, Robotics, and Automation.</p>
+
+            {/* Card 2: IoT & Robotics */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon robotics"><i className="fas fa-robot"></i></div>
+                  <h3>Bot Builds</h3>
+                  <p>IoT, Robotics, and Automation.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>IoT & Robotics</h3>
+                  <p>Create smart devices that connect to the internet or build autonomous robots. Focus on hardware integration, sensor data processing, and real-world automation solutions.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
-            <div className="track-card" data-track="cyber-blockchain">
-              <div className="track-icon cyber"><i className="fas fa-shield-alt"></i></div>
-              <h3>Code Guardians (Cyber Security & Block Chain)</h3>
-              <p>Cybersecurity and Blockchain.</p>
+
+            {/* Card 3: Cyber Security & Blockchain */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon cyber"><i className="fas fa-shield-alt"></i></div>
+                  <h3>Code Guardians</h3>
+                  <p>Cybersecurity and Blockchain.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>Cyber & Blockchain</h3>
+                  <p>Develop secure, decentralized applications (DApps) or create tools for ethical hacking, encryption, and threat detection. Protect digital assets and ensure data integrity.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
-            <div className="track-card" data-track="ev">
-              <div className="track-icon mobile"><i className="fas fa-car"></i></div>
-              <h3>Eco Drivers (Electrical Vehicles)</h3>
-              <p>Electrical Vehicle Technology.</p>
+
+            {/* Card 4: Electrical Vehicles */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon mobile"><i className="fas fa-car"></i></div>
+                  <h3>Eco Drivers</h3>
+                  <p>Electrical Vehicle Technology.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>Electrical Vehicles</h3>
+                  <p>Innovate for the future of mobility. Work on EV battery management systems, smart charging station networks, vehicle-to-grid (V2G) technology, or enhanced navigation for electric travel.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
-            <div className="track-card" data-track="women">
-              <div className="track-icon women"><i className="fas fa-venus"></i></div>
-              <h3>Femine Sakthi (Women Empowermen)<br />Only Women can participate</h3>
-              <p>Women Empowerment Technologies.</p>
+
+            {/* Card 5: Women Empowerment */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon women"><i className="fas fa-venus"></i></div>
+                  <h3>Femine Sakthi</h3>
+                  <p>Women Empowerment Technologies.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>Women Empowerment</h3>
+                  <p>Create tech solutions that address challenges faced by women. Focus on projects related to safety, health, financial inclusion, education, or bridging the gender gap in technology.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
-            <div className="track-card" data-track="business-plan">
-              <div className="track-icon ai-ml"><i className="fas fa-chart-line"></i></div>
-              <h3>Plan Horizons (Business Plan)</h3>
-              <p>Business Planning and Strategy.</p>
+
+            {/* Card 6: Business Plan */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon business-plan"><i className="fas fa-chart-line"></i></div>
+                  <h3>Plan Horizons</h3>
+                  <p>Business Planning and Strategy.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>Business Plan</h3>
+                  <p>Develop a comprehensive business model for a tech startup. This track focuses on market analysis, value proposition, revenue streams, and creating a scalable plan for a viable product.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
-            <div className="track-card" data-track="biomedical">
-              <div className="track-icon biomedical"><i className="fas fa-heartbeat"></i></div>
-              <h3>Medi Minds (Bio-medical)</h3>
-              <p>Biomedical Technologies.</p>
+
+            {/* Card 7: Bio-medical */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon biomedical"><i className="fas fa-heartbeat"></i></div>
+                  <h3>Medi Minds</h3>
+                  <p>Biomedical Technologies.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>Bio-medical</h3>
+                  <p>Innovate at the intersection of health and technology. Build solutions for medical diagnostics, design wearable health monitors, improve telemedicine, or create assistive devices for accessibility.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
-            <div className="track-card" data-track="mobile-web">
-              <div className="track-icon mobile"><i className="fas fa-mobile-alt"></i></div>
-              <h3>App Ventures (Mobile & Web Application)</h3>
-              <p>Mobile and Web Apps.</p>
+
+            {/* Card 8: Mobile & Web */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon mobile"><i className="fas fa-mobile-alt"></i></div>
+                  <h3>App Ventures</h3>
+                  <p>Mobile and Web Apps.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>Mobile & Web Apps</h3>
+                  <p>Design and build a functional, user-friendly application for mobile or web platforms. Focus on creating a seamless user experience to solve a real-world problem or provide entertainment.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
-            <div className="track-card" data-track="quantum">
-              <div className="track-icon ai-ml"><i className="fas fa-atom"></i></div>
-              <h3>Superposition (Quantum Computing)</h3>
-              <p>Quantum Computing Solutions.</p>
+            
+            {/* Card 9: Quantum Computing */}
+            <div className="track-card" onClick={handleCardFlip}>
+              <div className="track-card-inner">
+                <div className="track-card-front">
+                  <div className="track-icon quantum"><i className="fas fa-atom"></i></div>
+                  <h3>Superposition</h3>
+                  <p>Quantum Computing Solutions.</p>
+                </div>
+                <div className="track-card-back">
+                  <h3>Quantum Computing</h3>
+                  <p>Explore the next frontier of computation. Use quantum simulators or APIs to tackle complex problems in optimization, cryptography, or material science that are intractable for classical computers.</p>
+                  <span>Click to flip back</span>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
