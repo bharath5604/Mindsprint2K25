@@ -19,32 +19,35 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         
+        {/* --- MODIFICATION START: Corrected Banner Structure --- */}
         <div className="attractive-banner">
-          {/* This wrapper is crucial for the mobile layout */}
-          <div className="banner-top-row">
-            <div className="banner-logo">
-              <Image src="/logos/college-logo.png" alt="College Logo" width={65} height={65} />
-            </div>
-            <div className="banner-accreditations">
-              <div className="accreditation-item">
-                <Image src="/logos/naac-logo.png" alt="NAAC Logo" width={50} height={50} />
-                <span>A++ Grade</span>
-              </div>
-              <div className="accreditation-item">
-                <Image src="/logos/nba-logo.png" alt="NBA Logo" width={70} height={50} />
-                <span>Accredited</span>
-              </div>
-            </div>
+          <div className="banner-logo">
+            <Image src="/logos/college-logo.jpeg" alt="College Logo" width={65} height={65} />
           </div>
+
           <div className="banner-details">
-            <h2>Potti Sriramulu Chalavadi Mallikarjuna Rao College of Engineering & Technology</h2>
-            <h3>(Autonomous)</h3>
-            <p>Sponsored by SKPVV Hindu High Schools Committee, Estd: 1906 | Approved by AICTE | Affiliated to JNTU Kakinada</p>
+            <h2>Potti Sriramulu Chalavadi Mallikarjuna Rao</h2>
+            <h3>College of Engineering & Technology (Autonomous)</h3>
+            <p>Sponsored by SKPVV Hindu High Schools Committee | Approved by AICTE | Affiliated to JNTU Kakinada</p>
+          </div>
+
+          <div className="banner-accreditations">
+            <div className="accreditation-item">
+              <Image src="/logos/naac-logo.png" alt="NAAC Logo" width={50} height={50} />
+              <span>A++ Grade</span>
+            </div>
+            <div className="accreditation-item">
+              <Image src="/logos/nba.jpg" alt="NBA Logo" width={70} height={50} />
+              <span>Accredited</span>
+            </div>
           </div>
         </div>
+        {/* --- MODIFICATION END --- */}
         
         <Navigation />
+        
         {children}
+
       </body>
     </html>
   );
