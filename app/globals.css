@@ -1147,14 +1147,12 @@ body {
     padding: 0 10px;
   }
   
-  /* Hide unnecessary elements to make space */
   .banner-accreditations,
   .banner-details h3,
   .banner-details p {
     display: none;
   }
 
-  /* Adjust remaining elements */
   .banner-logo img {
     width: 50px;
     height: 50px;
