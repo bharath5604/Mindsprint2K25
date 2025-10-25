@@ -1173,11 +1173,15 @@ body {
     order: 1;
     margin: 0;
     padding: 0;
+    max-width: 55px;
+    max-height: 55px;
   }
   
   .banner-logo img {
     width: 55px !important;
     height: 55px !important;
+    max-width: 55px !important;
+    max-height: 55px !important;
     object-fit: contain;
   }
   
@@ -1210,9 +1214,17 @@ body {
     gap: 15px;
   }
   
+  .accreditation-item {
+    max-width: 38px;
+    max-height: 38px;
+    overflow: hidden;
+  }
+  
   .banner-accreditations img {
     width: 38px !important;
     height: 38px !important;
+    max-width: 38px !important;
+    max-height: 38px !important;
     object-fit: contain;
   }
   
@@ -1253,9 +1265,16 @@ body {
     padding: 13px 12px;
   }
   
+  .banner-logo {
+    max-width: 52px;
+    max-height: 52px;
+  }
+  
   .banner-logo img {
     width: 52px !important;
     height: 52px !important;
+    max-width: 52px !important;
+    max-height: 52px !important;
   }
   
   .banner-details h2 { 
@@ -1270,9 +1289,16 @@ body {
     font-size: 0.52rem;
   }
   
+  .accreditation-item {
+    max-width: 36px;
+    max-height: 36px;
+  }
+  
   .banner-accreditations img {
     width: 36px !important;
     height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
   }
   
   .member-fields {
@@ -1298,9 +1324,16 @@ body {
     padding: 14px 10px;
   }
   
+  .banner-logo {
+    max-width: 50px;
+    max-height: 50px;
+  }
+  
   .banner-logo img {
     width: 50px !important;
     height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
   }
   
   .banner-details h2 { 
@@ -1315,9 +1348,16 @@ body {
     font-size: 0.5rem;
   }
   
+  .accreditation-item {
+    max-width: 34px;
+    max-height: 34px;
+  }
+  
   .banner-accreditations img {
     width: 34px !important;
     height: 34px !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
   }
   
   .hero-title { 
@@ -1365,9 +1405,16 @@ body {
     padding: 15px 8px;
   }
   
+  .banner-logo {
+    max-width: 48px;
+    max-height: 48px;
+  }
+  
   .banner-logo img {
     width: 48px !important;
     height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
   }
   
   .banner-details h2 { 
@@ -1382,11 +1429,19 @@ body {
     font-size: 0.48rem;
   }
   
+  .accreditation-item {
+    max-width: 32px;
+    max-height: 32px;
+  }
+  
   .banner-accreditations img {
     width: 32px !important;
     height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
   }
 }
+
 /* Add this to the end of the "REGISTRATION PAGE" section in globals.css */
 
 .error-message {

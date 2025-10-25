@@ -31,54 +31,63 @@ export async function POST(request) {
         }
     }
 
-    // --- MODIFICATION START: Advanced Duplicate Check with Field-Specific Errors ---
-    
     const normalizeString = (str) => str ? str.trim().toLowerCase() : null;
 
-    const normalizedTeamName = normalizeString(teamName);
-    const normalizedEmail = normalizeString(email);
-    const teamMembers = [member1, member2, member3].map(normalizeString).filter(Boolean);
-      
-    const teamNameRegex = new RegExp(`^${normalizedTeamName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
-    const emailRegex = new RegExp(`^${normalizedEmail.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
-    const memberRegexes = teamMembers.map(m => new RegExp(`^${m.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i'));
+    // --- MODIFICATION: Separate, individual checks for each field ---
 
-    const orConditions = [
-      { email: emailRegex },
-      { teamName: teamNameRegex },
-      { member1Phone: member1Phone }
+    // 1. Check Team Name (Case-insensitive)
+    const teamNameRegex = new RegExp(`^${normalizeString(teamName).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
+    if (await Participant.findOne({ teamName: teamNameRegex })) {
+      return NextResponse.json({ message: "This Team Name is already taken.", field: "teamName" }, { status: 400 });
+    }
+
+    // 2. Check Email (Case-insensitive)
+    const emailRegex = new RegExp(`^${normalizeString(email).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
+    if (await Participant.findOne({ email: emailRegex })) {
+      return NextResponse.json({ message: "This Email is already registered.", field: "email" }, { status: 400 });
+    }
+
+    // 3. Check Phone Number
+    if (await Participant.findOne({ member1Phone: member1Phone })) {
+      return NextResponse.json({ message: "This Phone Number is already registered.", field: "member1Phone" }, { status: 400 });
+    }
+
+    // 4. Check Problem Statement Link
+    if (await Participant.findOne({ problemLink: problemLink })) {
+      return NextResponse.json({ message: "This Problem Statement link has already been submitted.", field: "problemLink" }, { status: 400 });
+    }
+
+    // 5. Check each Team Member individually
+    const members = [
+      { name: member1, field: 'member1' },
+      { name: member2, field: 'member2' },
+      { name: member3, field: 'member3' },
     ];
-    if (memberRegexes.length > 0) {
-      orConditions.push(
-        { member1: { $in: memberRegexes } },
-        { member2: { $in: memberRegexes } },
-        { member3: { $in: memberRegexes } }
-      );
-    }
-    
-    const existing = await Participant.findOne({ $or: orConditions });
 
-    if (existing) {
-      if (teamNameRegex.test(existing.teamName)) {
-        return NextResponse.json({ message: "This Team Name is already taken.", field: "teamName" }, { status: 400 });
+    for (const member of members) {
+      if (member.name) {
+        const normalizedName = normalizeString(member.name);
+        const memberRegex = new RegExp(`^${normalizedName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
+        const existingMember = await Participant.findOne({
+          $or: [
+            { member1: memberRegex },
+            { member2: memberRegex },
+            { member3: memberRegex },
+          ]
+        });
+        if (existingMember) {
+          return NextResponse.json({ message: `"${member.name}" is already registered in another team.`, field: member.field }, { status: 400 });
+        }
       }
-      if (emailRegex.test(existing.email)) {
-        return NextResponse.json({ message: "This Email is already registered.", field: "email" }, { status: 400 });
-      }
-      if (existing.member1Phone === member1Phone) {
-        return NextResponse.json({ message: "This Phone Number is already registered.", field: "member1Phone" }, { status: 400 });
-      }
-      // For member names, a general error is clearer.
-      return NextResponse.json({ message: "A team member's name is already registered in another team." }, { status: 400 });
     }
-    // --- MODIFICATION END ---
 
+    // All checks passed, proceed with saving
     const participant = new Participant(body);
     await participant.save();
 
     const subject = "✅ Mindsprint 2K25 Registration Successful";
-    const text = `Hello ${participant.member1} from team "${participant.teamName}",\n\nYou have successfully registered...`;
-    const html = `<p>Hello <b>${participant.member1}</b> from team "<b>${participant.teamName}</b>",...</p>`;
+    const text = `Hello ${participant.member1} from team "${participant.teamName}",\n\nYou have successfully registered for Mindsprint 2K25 under the track: ${participant.track}.\n\nThank you for registering!`;
+    const html = `<p>Hello <b>${participant.member1}</b> from team "<b>${participant.teamName}</b>",</p><p>You have successfully registered for <b>Mindsprint 2K25</b> under the track: <b>${participant.track}</b>.</p><p>Thank you for registering!</p>`;
     
     await sendMail(participant.email, subject, text, html);
 

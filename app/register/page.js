@@ -122,7 +122,7 @@ export default function RegisterPage() {
           </div>
 
           <form id="registrationForm" onSubmit={handleSubmit}>
-                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="Name of University/College/School" required />
+                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="Name of University/College/.." required />
                 <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
                 <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />
                 
@@ -170,6 +170,7 @@ export default function RegisterPage() {
                       <label><input type="radio" name="member1Gender" value="Female" checked={formData.member1Gender === 'Female'} onChange={handleChange} /><span>Female</span></label>
                       <label><input type="radio" name="member1Gender" value="Other" checked={formData.member1Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
                     </div>
+                     {errors.member1 && <span className="error-message">{errors.member1}</span>}
                   </div>
                 )}
 
@@ -181,6 +182,7 @@ export default function RegisterPage() {
                       <label><input type="radio" name="member2Gender" value="Female" checked={formData.member2Gender === 'Female'} onChange={handleChange} /><span>Female</span></label>
                       <label><input type="radio" name="member2Gender" value="Other" checked={formData.member2Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
                     </div>
+                    {errors.member2 && <span className="error-message">{errors.member2}</span>}
                   </div>
                 )}
                 
@@ -192,6 +194,7 @@ export default function RegisterPage() {
                       <label><input type="radio" name="member3Gender" value="Female" checked={formData.member3Gender === 'Female'} onChange={handleChange} /><span>Female</span></label>
                       <label><input type="radio" name="member3Gender" value="Other" checked={formData.member3Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
                     </div>
+                    {errors.member3 && <span className="error-message">{errors.member3}</span>}
                   </div>
                 )}
 
@@ -202,7 +205,7 @@ export default function RegisterPage() {
                 {errors.email && <span className="error-message">{errors.email}</span>}
                 
                 <input type="url" name="problemLink" value={formData.problemLink} onChange={handleChange} placeholder="Problem Statement Drive Link (PDF)" required />
-                
+                {errors.problemLink && <span className="error-message">{errors.problemLink}</span>}
                 <button type="submit">Register</button>
             </form>
             <p className="contact-info-text">
