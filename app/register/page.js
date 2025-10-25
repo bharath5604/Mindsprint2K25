@@ -170,8 +170,8 @@ export default function RegisterPage() {
                       <label><input type="radio" name="member1Gender" value="Female" checked={formData.member1Gender === 'Female'} onChange={handleChange} /><span>Female</span></label>
                       <label><input type="radio" name="member1Gender" value="Other" checked={formData.member1Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
                     </div>
-                     {errors.member1 && <span className="error-message">{errors.member1}</span>}
                   </div>
+                    {errors.member1 && <span className="error-message">{errors.member1}</span>}
                 )}
 
                 {memberCount >= 2 && (
