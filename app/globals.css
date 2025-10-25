@@ -77,7 +77,7 @@ body {
   color: #1a237e;
   margin: 2px 0;
   line-height: 1.2;
-  white-space: nowrap;
+  text-overflow: ellipsis
 }
 
 .banner-details p {
