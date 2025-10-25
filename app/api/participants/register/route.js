@@ -31,22 +31,35 @@ export async function POST(request) {
         }
     }
 
-    const normalizeString = (str) => str ? str.trim().toLowerCase() : null;
+    // --- MODIFICATION: New normalization logic to remove ALL spaces ---
+    const normalizeString = (str) => str ? str.replace(/\s/g, '').toLowerCase() : null;
 
-    // --- MODIFICATION: Separate, individual checks for each field ---
-
-    // 1. Check Team Name (Case-insensitive)
-    const teamNameRegex = new RegExp(`^${normalizeString(teamName).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
-    if (await Participant.findOne({ teamName: teamNameRegex })) {
-      return NextResponse.json({ message: "This Team Name is already taken.", field: "teamName" }, { status: 400 });
+    // 1. Check Team Name (Case-insensitive and space-insensitive)
+    const normalizedTeamName = normalizeString(teamName);
+    if (normalizedTeamName) {
+        const teamNameRegex = new RegExp(`^${normalizedTeamName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
+        // We use a custom aggregation pipeline to check against a normalized field in the DB
+        const existingTeam = await Participant.aggregate([
+            { $addFields: { normalizedDbTeamName: { $toLower: { $replaceAll: { input: "$teamName", find: " ", replacement: "" } } } } },
+            { $match: { normalizedDbTeamName: normalizedTeamName } }
+        ]);
+        if (existingTeam.length > 0) {
+            return NextResponse.json({ message: "This Team Name is already taken.", field: "teamName" }, { status: 400 });
+        }
     }
-
-    // 2. Check Email (Case-insensitive)
-    const emailRegex = new RegExp(`^${normalizeString(email).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
-    if (await Participant.findOne({ email: emailRegex })) {
-      return NextResponse.json({ message: "This Email is already registered.", field: "email" }, { status: 400 });
+    
+    // 2. Check Email (Case-insensitive and space-insensitive)
+    const normalizedEmail = normalizeString(email);
+    if (normalizedEmail) {
+        const existingEmail = await Participant.aggregate([
+            { $addFields: { normalizedDbEmail: { $toLower: { $replaceAll: { input: "$email", find: " ", replacement: "" } } } } },
+            { $match: { normalizedDbEmail: normalizedEmail } }
+        ]);
+        if (existingEmail.length > 0) {
+            return NextResponse.json({ message: "This Email is already registered.", field: "email" }, { status: 400 });
+        }
     }
-
+    
     // 3. Check Phone Number
     if (await Participant.findOne({ member1Phone: member1Phone })) {
       return NextResponse.json({ message: "This Phone Number is already registered.", field: "member1Phone" }, { status: 400 });
@@ -57,6 +70,33 @@ export async function POST(request) {
       return NextResponse.json({ message: "This Problem Statement link has already been submitted.", field: "problemLink" }, { status: 400 });
     }
 
+    // 5. Check each Team Member individually
+    const members = [
+      { name: member1, field: 'member1' },
+      { name: member2, field: 'member2' },
+      { name: member3, field: 'member3' },
+    ];
+
+    for (const member of members) {
+      if (member.name) {
+        const normalizedName = normalizeString(member.name);
+        const existingMember = await Participant.aggregate([
+            { $addFields: { 
+                normMember1: { $toLower: { $replaceAll: { input: "$member1", find: " ", replacement: "" } } },
+                normMember2: { $toLower: { $replaceAll: { input: "$member2", find: " ", replacement: "" } } },
+                normMember3: { $toLower: { $replaceAll: { input: "$member3", find: " ", replacement: "" } } },
+            }},
+            { $match: { $or: [
+                { normMember1: normalizedName },
+                { normMember2: normalizedName },
+                { normMember3: normalizedName },
+            ]}}
+        ]);
+        if (existingMember.length > 0) {
+          return NextResponse.json({ message: `"${member.name}" is already registered in another team.`, field: member.field }, { status: 400 });
+        }
+      }
+    }
 
     // All checks passed, proceed with saving
     const participant = new Participant(body);

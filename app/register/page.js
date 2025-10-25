@@ -201,7 +201,7 @@ export default function RegisterPage() {
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
                 {errors.email && <span className="error-message">{errors.email}</span>}
                 
-                <input type="url" name="problemLink" value={formData.problemLink} onChange={handleChange} placeholder="Problem Statement Drive Link (PDF)" required />
+                <input type="url" name="problemLink" value={formData.problemLink} onChange={handleChange} placeholder="Problem Abstract Drive Link (PDF Only)" required />
                 {errors.problemLink && <span className="error-message">{errors.problemLink}</span>}
                 <button type="submit">Register</button>
             </form>
