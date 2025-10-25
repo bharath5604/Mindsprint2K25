@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function RegisterPage() {
   const [responseMsg, setResponseMsg] = useState({ text: '', type: '' });
-  // This state will hold errors for specific fields like { email: "Email already exists." }
+  // This state will hold errors for specific fields, e.g., { email: "Email already exists." }
   const [errors, setErrors] = useState({});
 
   const initialFormData = {
@@ -85,11 +85,12 @@ export default function RegisterPage() {
         setFormData(initialFormData);
         setErrors({}); // Also clear errors on success
       } else {
-        // This is the new logic to handle specific field errors from the backend
+        // --- THIS IS THE CORRECTED LOGIC ---
         if (data.field) {
+          // If the error has a 'field', set the error for that specific field
           setErrors({ [data.field]: data.message });
         } else {
-          // Fallback for general errors
+          // Otherwise, show a general error message at the top
           showMessage(`❌ ${data.message || "Registration failed."}`, "error");
         }
       }
