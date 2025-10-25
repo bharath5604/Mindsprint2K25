@@ -11,6 +11,7 @@ export default function RegisterPage() {
     city: '',
     state: '',
     department: '',
+    teamName: '',
     teamSize: '',
     member1: '',
     member2: '',
@@ -41,7 +42,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const requiredFields = ['collegeName', 'city', 'state', 'department', 'teamSize', 'member1', 'member1Phone', 'email', 'problemLink', 'track', 'member1Gender'];
+    const requiredFields = ['collegeName', 'city', 'state', 'department', 'teamName', 'teamSize', 'member1', 'member1Phone', 'email', 'problemLink', 'track', 'member1Gender'];
     if (requiredFields.some(field => !formData[field])) {
         showMessage("❌ Please fill all required fields.", "error");
         return;
@@ -140,7 +141,7 @@ export default function RegisterPage() {
                     <option value="App Ventures (Mobile & Web Application)">App Ventures (Mobile & Web Application)</option>
                     <option value="Superposition (Quantum Computing)">Superposition (Quantum Computing)</option>
                 </select>
-
+             <input type="text" name="teamName" value={formData.teamName} onChange={handleChange} placeholder="Team Name" required />
                 <select name="teamSize" value={formData.teamSize} onChange={handleChange} required>
                     <option value="">Team Size</option>
                     <option value="1">1</option>

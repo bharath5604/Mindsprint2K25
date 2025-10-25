@@ -12,27 +12,27 @@ export async function GET(request) {
   try {
     const participants = await Participant.find().lean();
     
-    // --- MODIFICATIONS START ---
-    // Map data to include new fields for the Excel sheet
     const data = participants.map(p => ({
+      // --- MODIFICATION START ---
+      TeamName: p.teamName, // ADDED
+      // --- MODIFICATION END ---
       College: p.collegeName,
       City: p.city,
       State: p.state,
       Department: p.department,
-      Track: p.track, // ADDED
+      Track: p.track,
       TeamSize: p.teamSize,
       Member1: p.member1,
-      Member1_Gender: p.member1Gender, // ADDED
-      Member2: p.member2 || '', //test 
-      Member2_Gender: p.member2Gender || '', // ADDED
+      Member1_Gender: p.member1Gender,
+      Member2: p.member2 || '',
+      Member2_Gender: p.member2Gender || '',
       Member3: p.member3 || '',
-      Member3_Gender: p.member3Gender || '', // ADDED
+      Member3_Gender: p.member3Gender || '',
       Member1Phone: p.member1Phone,
       Email: p.email,
       ProblemLink: p.problemLink || '',
       RegisteredAt: p.createdAt,
     }));
-    // --- MODIFICATIONS END ---
 
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
