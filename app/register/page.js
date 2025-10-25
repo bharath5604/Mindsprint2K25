@@ -111,7 +111,7 @@ export default function RegisterPage() {
             {responseMsg.text}
           </div>
           <form id="registrationForm" onSubmit={handleSubmit}>
-                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="College / School Name" required />
+                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="Name of University/Colleg/.." required />
                 <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
                 <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />
                 
