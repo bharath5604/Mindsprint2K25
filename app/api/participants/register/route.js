@@ -57,29 +57,6 @@ export async function POST(request) {
       return NextResponse.json({ message: "This Problem Statement link has already been submitted.", field: "problemLink" }, { status: 400 });
     }
 
-    // 5. Check each Team Member individually
-    const members = [
-      { name: member1, field: 'member1' },
-      { name: member2, field: 'member2' },
-      { name: member3, field: 'member3' },
-    ];
-
-    for (const member of members) {
-      if (member.name) {
-        const normalizedName = normalizeString(member.name);
-        const memberRegex = new RegExp(`^${normalizedName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}$`, 'i');
-        const existingMember = await Participant.findOne({
-          $or: [
-            { member1: memberRegex },
-            { member2: memberRegex },
-            { member3: memberRegex },
-          ]
-        });
-        if (existingMember) {
-          return NextResponse.json({ message: `"${member.name}" is already registered in another team.`, field: member.field }, { status: 400 });
-        }
-      }
-    }
 
     // All checks passed, proceed with saving
     const participant = new Participant(body);

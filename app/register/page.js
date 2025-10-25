@@ -163,7 +163,6 @@ export default function RegisterPage() {
                 </select>
                 
                 {memberCount >= 1 && (
-                    <>
                   <div className="member-fields">
                     <input type="text" name="member1" value={formData.member1} onChange={handleChange} placeholder="1st Member Name" required />
                     <div className="gender-selector" role="group" aria-label="Member 1 Gender">
@@ -172,12 +171,9 @@ export default function RegisterPage() {
                       <label><input type="radio" name="member1Gender" value="Other" checked={formData.member1Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
                     </div>
                   </div>
-                    {errors.member1 && <span className="error-message">{errors.member1}</span>}
-                </>
                 )}
     
                 {memberCount >= 2 && (
-                    <>
                   <div className="member-fields">
                     <input type="text" name="member2" value={formData.member2} onChange={handleChange} placeholder="2nd Member Name" required />
                     <div className="gender-selector" role="group" aria-label="Member 2 Gender">
@@ -186,12 +182,9 @@ export default function RegisterPage() {
                       <label><input type="radio" name="member2Gender" value="Other" checked={formData.member2Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
                     </div>                    
                   </div>
-                  {errors.member2 && <span className="error-message">{errors.member2}</span>}
-                  </>
                 )}
                 
                 {memberCount >= 3 && (
-                    <>
                   <div className="member-fields">
                     <input type="text" name="member3" value={formData.member3} onChange={handleChange} placeholder="3rd Member Name" required />
                     <div className="gender-selector" role="group" aria-label="Member 3 Gender">
@@ -200,8 +193,6 @@ export default function RegisterPage() {
                       <label><input type="radio" name="member3Gender" value="Other" checked={formData.member3Gender === 'Other'} onChange={handleChange} /><span>Other</span></label>
                     </div>
                   </div>
-                    {errors.member3 && <span className="error-message">{errors.member3}</span>}
-                    </>
                 )}
 
                 <input type="text" name="member1Phone" value={formData.member1Phone} onChange={handleChange} placeholder="1st Member Phone" required />
