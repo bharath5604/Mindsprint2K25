@@ -1384,6 +1384,17 @@ body {
   
   .banner-accreditations img {
     width: 32px !important;
-    height: 32px !important;
+    height: 30px !important;
   }
+}
+/* Add this to the end of the "REGISTRATION PAGE" section in globals.css */
+
+.error-message {
+  color: #ff5252; /* A bright, noticeable red */
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: block; /* Ensures it takes its own line */
+  margin-top: -12px; /* Pulls it up closer to the input field above */
+  margin-bottom: 8px; /* Adds a little space before the next field */
+  text-align: left; /* Aligns the text to the left */
 }

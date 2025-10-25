@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-// The 'Link' import is no longer needed here.
 
 export default function RegisterPage() {
   const [responseMsg, setResponseMsg] = useState({ text: '', type: '' });
+  // This state will hold errors for specific fields like { email: "Email already exists." }
+  const [errors, setErrors] = useState({});
 
   const initialFormData = {
     collegeName: '',
@@ -32,6 +33,10 @@ export default function RegisterPage() {
       ...prevState,
       [name]: value,
     }));
+    // Clear the error for a field when the user starts typing in it again
+    if (errors[name]) {
+      setErrors(prevErrors => ({ ...prevErrors, [name]: null }));
+    }
   };
 
   const showMessage = (message, type) => {
@@ -41,6 +46,9 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Clear all previous errors on a new submission
+    setErrors({});
+    setResponseMsg({ text: '', type: '' });
 
     const requiredFields = ['collegeName', 'city', 'state', 'department', 'teamName', 'teamSize', 'member1', 'member1Phone', 'email', 'problemLink', 'track', 'member1Gender'];
     if (requiredFields.some(field => !formData[field])) {
@@ -73,37 +81,37 @@ export default function RegisterPage() {
       const data = await res.json();
 
       if (res.ok) {
-        showMessage("✅ Registration successful!", "success");
+        showMessage("✅ Registration successful! A confirmation email has been sent.", "success");
         setFormData(initialFormData);
+        setErrors({}); // Also clear errors on success
       } else {
-        showMessage(`❌ ${data.message || "Registration failed."}`, "error");
+        // This is the new logic to handle specific field errors from the backend
+        if (data.field) {
+          setErrors({ [data.field]: data.message });
+        } else {
+          // Fallback for general errors
+          showMessage(`❌ ${data.message || "Registration failed."}`, "error");
+        }
       }
     } catch (err) {
       console.error("Registration Error:", err);
-      showMessage("❌ Server connection failed. Try again later.", "error");
+      showMessage("❌ Server connection failed. Please try again later.", "error");
     }
   };
 
   const memberCount = parseInt(formData.teamSize, 10) || 0;
 
   return (
-    // The <header> and navbar have been removed from this file.
-    // They are now handled globally in app/layout.js.
     <main>
         <div className="register-container">
           <h2>Hackathon Registration</h2>
           
           <div style={{
-            textAlign: 'center',
-            padding: '10px 15px',
+            textAlign: 'center', padding: '10px 15px',
             backgroundColor: 'rgba(251, 191, 36, 0.15)',
-            borderRadius: '10px',
-            border: '1px solid rgba(251, 191, 36, 0.3)',
-            color: '#fbbf24',
-            fontWeight: '600',
-            fontSize: '1rem',
-            marginBottom: '15px',
-            fontFamily: 'Inter, sans-serif'
+            borderRadius: '10px', border: '1px solid rgba(251, 191, 36, 0.3)',
+            color: '#fbbf24', fontWeight: '600',
+            fontSize: '1rem', marginBottom: '15px', fontFamily: 'Inter, sans-serif'
           }}>
             Registrations close on November 30, 2025
           </div>
@@ -111,8 +119,9 @@ export default function RegisterPage() {
           <div id="responseMsg" style={{ color: responseMsg.type === 'success' ? '#16a34a' : '#dc2626', opacity: responseMsg.text ? 1 : 0, transition: 'opacity 0.3s' }}>
             {responseMsg.text}
           </div>
+
           <form id="registrationForm" onSubmit={handleSubmit}>
-                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="Name of University/College/.." required />
+                <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} placeholder="Name of University/College/School" required />
                 <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
                 <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />
                 
@@ -141,7 +150,10 @@ export default function RegisterPage() {
                     <option value="App Ventures (Mobile & Web Application)">App Ventures (Mobile & Web Application)</option>
                     <option value="Superposition (Quantum Computing)">Superposition (Quantum Computing)</option>
                 </select>
-             <input type="text" name="teamName" value={formData.teamName} onChange={handleChange} placeholder="Team Name" required />
+
+                <input type="text" name="teamName" value={formData.teamName} onChange={handleChange} placeholder="Team Name" required />
+                {errors.teamName && <span className="error-message">{errors.teamName}</span>}
+
                 <select name="teamSize" value={formData.teamSize} onChange={handleChange} required>
                     <option value="">Team Size</option>
                     <option value="1">1</option>
@@ -183,7 +195,11 @@ export default function RegisterPage() {
                 )}
 
                 <input type="text" name="member1Phone" value={formData.member1Phone} onChange={handleChange} placeholder="1st Member Phone" required />
+                {errors.member1Phone && <span className="error-message">{errors.member1Phone}</span>}
+
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
+                {errors.email && <span className="error-message">{errors.email}</span>}
+                
                 <input type="url" name="problemLink" value={formData.problemLink} onChange={handleChange} placeholder="Problem Statement Drive Link (PDF)" required />
                 
                 <button type="submit">Register</button>
