@@ -3,10 +3,11 @@
 import Image from 'next/image';
 
 const logos = [
-  { src: '/logos/brainovision.png', alt: 'Partner Logo 1' },
+  { src: '/logos/brainovision.png', alt: 'Partner Logo 0' },
+    { src: '/logos/Rotary-Midtown-Logo-01.png', alt: 'Partner Logo 1' },
    { src: '/logos/logo1.jpg', alt: 'Partner Logo 2' },
     { src: '/logos/logo2.jpg', alt: 'Partner Logo 3' },
-     { src: '/logos/logo3.jpg', alt: 'Partner Logo 3' },
+     { src: '/logos/logo3.jpg', alt: 'Partner Logo 4' },
   // Add more logos here
 ];
 
