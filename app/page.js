@@ -52,7 +52,7 @@ export default function Home() {
             <br />College Hackathon
           </h1>
           {/* MODIFICATION: Updated subtitle to mention prizes */}
-          <p className="hero-subtitle">Join the ultimate coding challenge where innovation meets creativity. Compete for a massive prize pool and 100+ free internship opportunities!</p>
+          <p className="hero-subtitle">Join the ultimate coding challenge where innovation meets creativity. Compete for a massive prize pool and 100+ free Virtual internship opportunities!</p>
           <div id="responseMsg"></div>
           
           {/* --- MODIFICATION: Removed ParticipantCount component --- */}
@@ -327,10 +327,12 @@ export default function Home() {
             <div className="contact-card">
               <i className="fas fa-phone"></i>
               <h3>Phone</h3>
-              <p>Rtr.K.Tejasri: +91 9390866368</p>
-              <p>Anusha: +91 78933 33750</p>
-              <p>Rtr.N.devi Shashank: +91 92478 88889</p>
-              <p>A.Hrudayaraj Akhil: +91 63002 57737</p>
+              <p>Deepthi: +91 8639812316</p>
+              <p>PRASANA: +91 9398909087</p>
+              <p>CHAITANYA: +91 7396166089</p>
+              <p>RTR.VAMSI: +91 7989568835</p>
+              <p>RTR LALITH: +91 9182476691</p>
+              <p>RTR ANUSHA: +91 7893333750</p>
             </div>
             <div className="contact-card">
               <i className="fas fa-map-marker-alt"></i>
