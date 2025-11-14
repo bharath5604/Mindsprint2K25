@@ -115,7 +115,7 @@ export default function Home() {
               </div>
               <h3>Competition</h3>
               {/* MODIFICATION: Updated card text to mention prizes and internships */}
-              <p>Compete for exciting cash prizes and recognition, with 100+ free internships for top teams!</p>
+              <p>Compete for exciting cash prizes and recognition, with 100+ free virtual  internships for top teams!</p>
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function Home() {
              <div className="internship-content">
                 <i className="fas fa-briefcase internship-icon"></i>
                 <div className="internship-text">
-                  <h3>100+ Free Internships</h3>
+                  <h3>100+ Free Virtual  Internships</h3>
                   <p>Top-performing teams will be offered exclusive internship opportunities to gain real-world experience and accelerate their careers.</p>
                 </div>
              </div>
