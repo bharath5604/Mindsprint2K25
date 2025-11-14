@@ -29,10 +29,12 @@ export default function Navigation() {
           <ul className="nav-menu">
             <li><a href="#home" onClick={handleSmoothScroll}>Home</a></li>
             <li><a href="#about" onClick={handleSmoothScroll}>About</a></li>
+            {/* MODIFICATION: Added Prizes link */}
+            <li><a href="#prizes" onClick={handleSmoothScroll}>Prizes</a></li>
             <li><a href="#tracks" onClick={handleSmoothScroll}>Tracks</a></li>
             <li><a href="#partners" onClick={handleSmoothScroll}>Partners</a></li>
             <li><a href="#contact" onClick={handleSmoothScroll}>Contact</a></li>
-            <li><Link href="/register" className="register-btn">Register Now</Link></li>
+            <li><Link href="https://rzp.io/rzp/KOR0p5l" className="register-btn">Register Now</Link></li>
           </ul>
         ) : (
           <Link href="/" className="home-btn" style={{marginTop: '0', marginLeft: '0'}}>Home</Link>

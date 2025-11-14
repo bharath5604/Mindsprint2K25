@@ -1,3 +1,4 @@
+
 /* =================================== */
 /* ==   GLOBAL VARIABLES & SETUP    == */
 /* =================================== */
@@ -531,6 +532,157 @@ body {
 .about-card p {
     color: #64748b;
     line-height: 1.6;
+}
+
+
+/* =================================== */
+/* ==   PRIZES SECTION (REDESIGNED) == */
+/* =================================== */
+
+.prizes-section {
+    padding: 100px 0;
+    background: #f4f7fc; /* A slightly cooler, modern light background */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Keyframes for animations (re-used) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shine {
+    0% { transform: translateX(-150%) skewX(-25deg); }
+    50% { transform: translateX(150%) skewX(-25deg); }
+    100% { transform: translateX(150%) skewX(-25deg); }
+}
+
+/* MODIFICATION: New styles for the single Prize Pool banner */
+.prize-pool-banner {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 80px auto 0 auto; /* Center the banner */
+    padding: 50px 40px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #667eea, #764ba2); /* Attractive purple gradient */
+    color: white;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    overflow: hidden;
+    /* Animation */
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.prize-pool-content {
+    position: relative;
+    z-index: 2;
+}
+
+.prize-pool-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #fbbf24; /* Gold color */
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.prize-pool-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.prize-pool-amount {
+    font-size: clamp(2.5rem, 10vw, 4.5rem); /* Responsive font size */
+    font-weight: 800;
+    margin: 10px 0;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 5px 25px rgba(251, 191, 36, 0.3);
+}
+
+.prize-pool-description {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.7;
+}
+
+/* Shine Effect Pseudo-Element (Unchanged) */
+.prize-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    z-index: 1;
+    animation: shine 5s infinite;
+}
+
+/* Internship Banner (Slightly adjusted margin) */
+.internship-banner {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-top: 40px; /* Reduced margin from top */
+    padding: 30px 40px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #2b3a8c, #0d47a1);
+    color: white;
+    box-shadow: 0 10px 40px rgba(13, 71, 161, 0.3);
+    overflow: hidden;
+    /* Animation */
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards; /* Staggered animation */
+}
+
+.internship-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    z-index: 2;
+}
+
+.internship-icon {
+    font-size: 3.5rem;
+    flex-shrink: 0;
+    color: #64b5f6;
+}
+
+.internship-text h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.internship-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+/* Responsive adjustment for Internship Banner */
+@media (max-width: 768px) {
+    .internship-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
 }
 
 /* =================================== */
@@ -1239,7 +1391,8 @@ body {
   .tracks-grid { 
     grid-template-columns: 1fr; 
   }
-  .about-content, .contact-info { 
+  /* MODIFICATION: Added .prizes-grid for responsive stacking */
+  .about-content, .contact-info, .prizes-grid { 
     grid-template-columns: 1fr; 
     gap: 30px; 
   }

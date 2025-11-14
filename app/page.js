@@ -2,7 +2,8 @@
 // This page needs to be a client component for the smooth scroll event handler.
 
 import Link from 'next/link';
-import ParticipantCount from '../components/ParticipantCount';
+// --- MODIFICATION: Removed ParticipantCount import ---
+// import ParticipantCount from '../components/ParticipantCount'; 
 import Countdown from '@/components/Countdown';
 import Partners from '@/components/Partners';
 // The 'Navigation' import is removed as it's now in the global layout.
@@ -50,9 +51,13 @@ export default function Home() {
             <span className="gradient-text">Mindsprint2K25</span>
             <br />College Hackathon
           </h1>
-          <p className="hero-subtitle">Join the ultimate coding challenge where innovation meets creativity. Build, compete, and win!</p>
+          {/* MODIFICATION: Updated subtitle to mention prizes */}
+          <p className="hero-subtitle">Join the ultimate coding challenge where innovation meets creativity. Compete for a massive prize pool and 100+ free internship opportunities!</p>
           <div id="responseMsg"></div>
-          <ParticipantCount />
+          
+          {/* --- MODIFICATION: Removed ParticipantCount component --- */}
+          {/* <ParticipantCount /> */}
+
           <div className="hero-details">
             <div className="detail-item">
               <i className="fas fa-calendar-alt"></i>
@@ -68,10 +73,11 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-buttons">
-            <Link href="/register" className="btn-primary">
+            {/* --- MODIFICATION: Changed Link to an external <a> tag --- */}
+            <a href="https://rzp.io/rzp/KOR0p5l" target="" rel="noopener noreferrer" className="btn-primary">
               <span>Register Now</span>
               <i className="fas fa-arrow-right"></i>
-            </Link>
+            </a>
             <a href="#tracks" className="btn-secondary" onClick={handleSmoothScroll}>
               <span>View Tracks</span>
               <i className="fas fa-eye"></i>
@@ -108,8 +114,40 @@ export default function Home() {
                 <i className="fas fa-trophy"></i>
               </div>
               <h3>Competition</h3>
-              <p>Compete for exciting prizes and recognition while pushing your limits</p>
+              {/* MODIFICATION: Updated card text to mention prizes and internships */}
+              <p>Compete for exciting cash prizes and recognition, with 100+ free internships for top teams!</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- NEW SECTION: Prizes & Rewards (MODIFIED FOR PRIZE POOL) --- */}
+      <section id="prizes" className="prizes-section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Prizes & Rewards</h2>
+            <p className="section-subtitle">Compete for a massive prize pool and kickstart your career.</p>
+          </div>
+          
+          <div className="prize-pool-banner">
+              <div className="prize-shine"></div>
+              <div className="prize-pool-content">
+                  <i className="fas fa-sack-dollar prize-pool-icon"></i>
+                  <h3 className="prize-pool-title">Total Prize Pool</h3>
+                  <p className="prize-pool-amount">Worth ₹3 Lakhs+</p>
+                  <p className="prize-pool-description">Including cash prizes, exciting goodies, and valuable resources for the top-performing teams.</p>
+              </div>
+          </div>
+
+          <div className="internship-banner">
+             <div className="prize-shine"></div>
+             <div className="internship-content">
+                <i className="fas fa-briefcase internship-icon"></i>
+                <div className="internship-text">
+                  <h3>100+ Free Internships</h3>
+                  <p>Top-performing teams will be offered exclusive internship opportunities to gain real-world experience and accelerate their careers.</p>
+                </div>
+             </div>
           </div>
         </div>
       </section>
@@ -317,6 +355,8 @@ export default function Home() {
             <div className="footer-links">
               <a href="#home" onClick={handleSmoothScroll}>Home</a>
               <a href="#about" onClick={handleSmoothScroll}>About</a>
+              {/* MODIFICATION: Added Prizes link */}
+              <a href="#prizes" onClick={handleSmoothScroll}>Prizes</a>
               <a href="#tracks" onClick={handleSmoothScroll}>Tracks</a>
               <a href="#contact" onClick={handleSmoothScroll}>Contact</a>
               <a href="#partners" onClick={handleSmoothScroll}>Partners</a>
