@@ -1,4 +1,3 @@
-
 /* =================================== */
 /* ==   GLOBAL VARIABLES & SETUP    == */
 /* =================================== */
@@ -879,6 +878,20 @@ body {
     font-size: 1rem;
 }
 
+
+.phone-list {
+    display: inline-block; 
+    text-align: left;      
+}
+
+.contact-card .phone-list p {
+    margin-bottom: 8px; 
+}
+
+.contact-card .phone-list p:last-child {
+    margin-bottom: 0; 
+}
+
 /* Footer */
 .footer {
     background: #1a202c;
@@ -1606,3 +1619,4 @@ body {
   margin-bottom: 8px; /* Adds a little space before the next field */
   text-align: left; /* Aligns the text to the left */
 }
+

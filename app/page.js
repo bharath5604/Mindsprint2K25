@@ -2,8 +2,8 @@
 // This page needs to be a client component for the smooth scroll event handler.
 
 import Link from 'next/link';
-// --- MODIFICATION: Removed ParticipantCount import ---
-// import ParticipantCount from '../components/ParticipantCount'; 
+// --- MODIFICATION: Import the new SheetCount component ---
+import SheetCount from '@/components/SheetCount'; 
 import Countdown from '@/components/Countdown';
 import Partners from '@/components/Partners';
 // The 'Navigation' import is removed as it's now in the global layout.
@@ -23,7 +23,7 @@ export default function Home() {
       });
     }
   };
-   // --- MODIFICATION: ADD THIS FUNCTION FOR THE FLIP EFFECT ---
+   // --- ADD THIS FUNCTION FOR THE FLIP EFFECT ---
   const handleCardFlip = (e) => {
     e.currentTarget.classList.toggle('is-flipped');
   };
@@ -51,12 +51,12 @@ export default function Home() {
             <span className="gradient-text">Mindsprint2K25</span>
             <br />College Hackathon
           </h1>
-          {/* MODIFICATION: Updated subtitle to mention prizes */}
+          {/* MODIFICATION: Updated subtitle to mention "Virtual" internships */}
           <p className="hero-subtitle">Join the ultimate coding challenge where innovation meets creativity. Compete for a massive prize pool and 100+ free Virtual internship opportunities!</p>
           <div id="responseMsg"></div>
           
-          {/* --- MODIFICATION: Removed ParticipantCount component --- */}
-          {/* <ParticipantCount /> */}
+          {/* --- MODIFICATION: Added the SheetCount component --- */}
+          <SheetCount />
 
           <div className="hero-details">
             <div className="detail-item">
@@ -73,8 +73,8 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-buttons">
-            {/* --- MODIFICATION: Changed Link to an external <a> tag --- */}
-            <a href="https://rzp.io/rzp/KOR0p5l" target="" rel="noopener noreferrer" className="btn-primary">
+            {/* --- MODIFICATION: Updated with your Razorpay link and fixed target --- */}
+            <a href="https://rzp.io/rzp/KOR0p5l" target="_blank" rel="noopener noreferrer" className="btn-primary">
               <span>Register Now</span>
               <i className="fas fa-arrow-right"></i>
             </a>
@@ -114,8 +114,8 @@ export default function Home() {
                 <i className="fas fa-trophy"></i>
               </div>
               <h3>Competition</h3>
-              {/* MODIFICATION: Updated card text to mention prizes and internships */}
-              <p>Compete for exciting cash prizes and recognition, with 100+ free virtual  internships for top teams!</p>
+              {/* MODIFICATION: Updated card text to mention "virtual" internships */}
+              <p>Compete for exciting cash prizes and recognition, with 100+ free virtual internships for top teams!</p>
             </div>
           </div>
         </div>
@@ -144,7 +144,8 @@ export default function Home() {
              <div className="internship-content">
                 <i className="fas fa-briefcase internship-icon"></i>
                 <div className="internship-text">
-                  <h3>100+ Free Virtual  Internships</h3>
+                  {/* MODIFICATION: Updated h3 to include "Virtual" */}
+                  <h3>100+ Free Virtual Internships</h3>
                   <p>Top-performing teams will be offered exclusive internship opportunities to gain real-world experience and accelerate their careers.</p>
                 </div>
              </div>
@@ -160,7 +161,6 @@ export default function Home() {
             <h2 className="section-title1">Hackathon Tracks</h2>
             <p className="section-subtitle">Choose your domain and start building the future</p>
           </div>
-          {/* --- MODIFICATION: REPLACE THE ENTIRE .tracks-grid DIV --- */}
           <div className="tracks-grid">
             
             {/* Card 1: AI & ML */}
@@ -327,6 +327,7 @@ export default function Home() {
             <div className="contact-card">
               <i className="fas fa-phone"></i>
               <h3>Phone</h3>
+              {/* MODIFICATION: Updated phone numbers */}
               <p>Deepthi: +91 8639812316</p>
               <p>PRASANA: +91 9398909087</p>
               <p>CHAITANYA: +91 7396166089</p>
@@ -357,7 +358,6 @@ export default function Home() {
             <div className="footer-links">
               <a href="#home" onClick={handleSmoothScroll}>Home</a>
               <a href="#about" onClick={handleSmoothScroll}>About</a>
-              {/* MODIFICATION: Added Prizes link */}
               <a href="#prizes" onClick={handleSmoothScroll}>Prizes</a>
               <a href="#tracks" onClick={handleSmoothScroll}>Tracks</a>
               <a href="#contact" onClick={handleSmoothScroll}>Contact</a>
