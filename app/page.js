@@ -328,12 +328,13 @@ export default function Home() {
               <i className="fas fa-phone"></i>
               <h3>Phone</h3>
               {/* MODIFICATION: Updated phone numbers */}
-              <p>Deepthi: +91 8639812316</p>
-              <p>PRASANA: +91 9398909087</p>
-              <p>CHAITANYA: +91 7396166089</p>
-              <p>RTR.VAMSI: +91 7989568835</p>
               <p>RTR LALITH: +91 9182476691</p>
+              <p>CHAITANYA: +91 7396166089</p>
               <p>RTR ANUSHA: +91 7893333750</p>
+              <p>DEEPTHI: +91 8639812316</p>
+              <p>RTR.VAMSI: +91 7989568835</p>
+              <p>PRASANA: +91 9398909087</p>
+              
             </div>
             <div className="contact-card">
               <i className="fas fa-map-marker-alt"></i>
